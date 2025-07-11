@@ -60,23 +60,23 @@ Para cada missão iniciada, as Tartarugas precisam de um plano. O jogador deve p
 
 ## Mecânica de Batalhas⠀⠀⠀⠀⠀⠀
 
-A batalha não é algo que o jogador "joga", mas sim um evento que o programa resolve com base em uma
+A batalha não é algo que o jogador **"joga"**, mas sim um evento que o programa resolve com base em uma
 estratégia denida na implementação. O processo é dividido em duas fases: Preparação e Resolução.
 
 ### 1. Fase de Preparação⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
 Antes de a batalha ser resolvida, o jogador usa a Central de Comando para se preparar:<br/>
 
-:pizza: Escolhe a Missão<br/>
-:pizza: Consulta os Arquivos dos Vilões<br/>
-:pizza: Monta a Equipe<br/>
-:pizza: Seleciona o Equipamento(até dois)<br/>
+:pizza: ***Escolhe a Missão***<br/>
+:pizza: ***Consulta os Arquivos dos Vilões***<br/>
+:pizza: ***Monta a Equipe***<br/>
+:pizza: ***Seleciona o Equipamento(até dois)***<br/>
 
 ### 2. Fase de Resolução
 
 Uma vez que o jogador envia a equipe, o programa calcula o resultado instantaneamente.<br/>
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
->![NOTE] 
+>[!NOTE] 
 > _Força da Equipe:_ Calculada a partir da média da habilidade dos membros
 >da equipe. Quando um membro da equipe está equipado com a sua arma
 >favorita (Leonardo - Katanas; Donatello - Bō; Michelangelo - Nunchakus;
@@ -95,18 +95,18 @@ aleatório de -2 a +2) - Caos Mutante (número aleatório entre
 
 Com base no Resultado Final, o sistema determina o que aconteceu e atualiza o estado do jogo.
 
-- Se Resultado Final for alto (ex: > 3): Vitória Perfeita!
+- ***Se Resultado Final for alto (ex: > 3): Vitória Perfeita!***
     - A missão é considerada um sucesso e movida para o Diário de Bordo do Mestre Splinter _(a pilha de missões concluídas)_.
-    - Todas as Tartarugas da equipe retornam com o status *"Disponível"* e aumentam seu nível em *+0.3*.
+    - Todas as Tartarugas da equipe retornam com o status **"Disponível"** e aumentam seu nível em **+0.3**.
 
-- Se Resultado Final for médio (ex: de 0 a 3): Vitória com Custo.
+- ***Se Resultado Final for médio (ex: de 0 a 3): Vitória com Custo.***
     - A missão é um sucesso e vai para o Diário de Bordo.
-    - Porém, uma das Tartarugas se feriu! Seu status muda para *"Ferido"* e ela fica indisponível pelas próximas 2 missões.
-    - Tartarugas que não se feriram aumentam seu nível em *+0.2*.
+    - Porém, uma das Tartarugas se feriu! Seu status muda para **"Ferido"** e ela fica indisponível pelas próximas 2 missões.
+    - Tartarugas que não se feriram aumentam seu nível em **+0.2**.
 
-- Se Resultado Final for baixo (ex: < 0): Derrota!
+- ***Se Resultado Final for baixo (ex: < 0): Derrota!***
     - A missão falhou. Ela não vai para o Diário de Bordo. _(Pode até voltar para o painel de alertas)_.
-    -Toda a equipe enviada retorna com o status *"Ferido"* e fica indisponível por um tempo _(definido pelo programador)_. Não há aumento de nível nesse caso.
+    -Toda a equipe enviada retorna com o status **"Ferido"** e fica indisponível por um tempo _(definido pelo programador)_. Não há aumento de nível nesse caso.
 
 
 

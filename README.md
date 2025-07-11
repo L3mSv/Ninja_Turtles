@@ -34,29 +34,29 @@ O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal,
 
 
 ***2. Módulos da Central de Comando:***
-Aqui estão as funcionalidades que sua Central de Comando deve ter.
+<br/>Aqui estão as funcionalidades que sua Central de Comando deve ter.<br/>
 
-- :pizza: Módulo 1: O Painel de Alertas de Missões
+- :pizza: ***Módulo 2.1: O Painel de Alertas de Missões***
 
-    Novas missões são reportadas para a Central a todo momento. Elas chegam
-    de fontes como April O'Neil ou de scanners da polícia.
+    Novas missões são reportadas para a Central a todo momento.<br/>
+    Elas chegam de fontes como April O'Neil ou de scanners da polícia.<br/>
 
-- :pizza: Módulo 2: Os Arquivos de Vilões do Donatello
+- :pizza: ***Módulo 2.2: Os Arquivos de Vilões do Donatello***
 
-    Donatello mantém um banco de dados sobre cada vilão que já enfrentaram.
+    Donatello mantém um banco de dados sobre cada vilão que já enfrentaram.<br/>
 
     Tornando possível buscar informações sobre um vilão, pois as Tartarugas
     podem precisar consultar informações sobre um inimigo no meio de uma
     batalha.
 
-- :pizza: Módulo 3: O Diário de Bordo do Mestre Splinter
+- :pizza: ***Módulo 2.3: O Diário de Bordo do Mestre Splinter***
 
     Mestre Splinter exige um relatório de todas as missões concluídas para
     analisar o desempenho de seus filhos.
 
-- :pizza: Módulo 4: O Arsenal e o Plano de Ação
+- :pizza: ***Módulo 2.4: O Arsenal e o Plano de Ação***
 
-    Para cada missão iniciada, as Tartarugas precisam de um plano.
+    Para cada missão iniciada, as Tartarugas precisam de um plano.<br/>
     A jogador deve poder montar uma lista de equipamentos do arsenal para levar àquela missão especíca.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

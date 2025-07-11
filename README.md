@@ -1,6 +1,6 @@
 # Ninja_Turtles
 
-![ninja-turtle-pixel](images/ninja-turtle-pixel.png)
+![ninja-turtle-pixel](images/ninjas.png)
 
 ## Componentes do Grupo
 - Lucas 

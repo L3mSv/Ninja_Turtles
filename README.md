@@ -36,28 +36,28 @@ O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal,
 ***2. Módulos da Central de Comando:***
 Aqui estão as funcionalidades que sua Central de Comando deve ter.
 
-    - :pizza: Módulo 1: O Painel de Alertas de Missões
+- :pizza: Módulo 1: O Painel de Alertas de Missões
 
-        Novas missões são reportadas para a Central a todo momento. Elas chegam
-        de fontes como April O'Neil ou de scanners da polícia.
-    
-    - :pizza: Módulo 2: Os Arquivos de Vilões do Donatello
+    Novas missões são reportadas para a Central a todo momento. Elas chegam
+    de fontes como April O'Neil ou de scanners da polícia.
 
-        Donatello mantém um banco de dados sobre cada vilão que já enfrentaram.
+- :pizza: Módulo 2: Os Arquivos de Vilões do Donatello
 
-        Tornando possível buscar informações sobre um vilão, pois as Tartarugas
-        podem precisar consultar informações sobre um inimigo no meio de uma
-        batalha.
+    Donatello mantém um banco de dados sobre cada vilão que já enfrentaram.
 
-    - :pizza: Módulo 3: O Diário de Bordo do Mestre Splinter
+    Tornando possível buscar informações sobre um vilão, pois as Tartarugas
+    podem precisar consultar informações sobre um inimigo no meio de uma
+    batalha.
 
-        Mestre Splinter exige um relatório de todas as missões concluídas para
-        analisar o desempenho de seus filhos.
+- :pizza: Módulo 3: O Diário de Bordo do Mestre Splinter
 
-    - :pizza: Módulo 4: O Arsenal e o Plano de Ação
+    Mestre Splinter exige um relatório de todas as missões concluídas para
+    analisar o desempenho de seus filhos.
 
-        Para cada missão iniciada, as Tartarugas precisam de um plano.
-        A jogador deve poder montar uma lista de equipamentos do arsenal para levar àquela missão especíca.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+- :pizza: Módulo 4: O Arsenal e o Plano de Ação
+
+    Para cada missão iniciada, as Tartarugas precisam de um plano.
+    A jogador deve poder montar uma lista de equipamentos do arsenal para levar àquela missão especíca.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

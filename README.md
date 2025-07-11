@@ -14,24 +14,24 @@ catalogar os vilões e otimizar as operações do time.
 
 ***1.Entidades do Sistema:***
 
-:pizza: Tartaruga:
-    - nome: Leonardo, Donatello, Raphael, Michelangelo
-    - status: Disponível, Em Missão, Ferido.
-    - nível: 1-10
+:pizza: Tartaruga:<br/>
+    - nome: Leonardo, Donatello, Raphael, Michelangelo<br/>
+    - status: Disponível, Em Missão, Ferido.<br/>
+    - nível: 1-10<br/>
 
-:pizza: Vilão: 
-    - nome: Destruidor, Krang, Bebop, etc...
-    - nível: 1-10
-    - ponto fraco: texto
+:pizza: Vilão:<br/>
+    - nome: Destruidor, Krang, Bebop, etc...<br/>
+    - nível: 1-10<br/>
+    - ponto fraco: texto<br/>
 
-:pizza: Missão: 
-    - descrição: Assalto ao Banco Central, Sequestro do presidente, etc...
-    - local: Centro da cidade, Casa branca, etc...
-    - nível: 1-10
+:pizza: Missão:<br/> 
+    - descrição: Assalto ao Banco Central, Sequestro do presidente, etc...<br/>
+    - local: Centro da cidade, Casa branca, etc...<br/>
+    - nível: 1-10<br/>
 >OBS: Descrição de missões e seus respectivos níveis de ameaça são aleatórios, não há um padrão neles.
 
-:pizza: Equipamento:
-    - nome: Katanas, Bō, Nunchakus, Sai, Bumerangue-Pizza, Comunicador-Casco
+:pizza: Equipamento:<br/>
+    - nome: Katanas, Bō, Nunchakus, Sai, Bumerangue-Pizza, Comunicador-Casco<br/>
 
 
 ***2. Módulos da Central de Comando:***

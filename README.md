@@ -1,5 +1,7 @@
 # Ninja_Turtles
 
+![ninja-turtle-pixel](images/ninja-turtle-pixel.png)
+
 ## Componentes do Grupo
 - Lucas 
 - Felipe 

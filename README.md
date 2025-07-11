@@ -108,10 +108,14 @@ Com base no Resultado Final, o sistema determina o que aconteceu e atualiza o es
     - A missão falhou. Ela não vai para o Diário de Bordo. _(Pode até voltar para o painel de alertas)_.
     -Toda a equipe enviada retorna com o status **"Ferido"** e fica indisponível por um tempo _(definido pelo programador)_. Não há aumento de nível nesse caso.
 
+## Agradecimento 
+
+Todas as imagens deste repositório foram roubadas na cara-dura, pórem avisando desde já a intenção não é de deixar nenhum artista desconfortável apenas queriamos decorar o repo, por isso, caso alguém deseje que retiremos alguma das artes assim será feito. Em contrapartida para os usuários que cairam de paraquedas neste repositório e se sentiram motivados a jogar, apenas lhes digo uma frase...
+
+<br/><br/>**BOA SORTE!**<br/><br/>
 
 
-
-
+![ninjas-comendo-pizza](images/ninjas_pizza.jpg)
 
 
 

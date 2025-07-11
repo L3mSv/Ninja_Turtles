@@ -14,9 +14,9 @@ O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal,
 ***1.Entidades do Sistema:***
 
 :pizza: Tartaruga:<br/>
-- nome: Leonardo, Donatello, Raphael, Michelangelo<br/>
-- status: Disponível, Em Missão, Ferido.<br/>
-- nível: 1-10<br/>
+- **nome:** Leonardo, Donatello, Raphael, Michelangelo<br/>
+- **status:** Disponível, Em Missão, Ferido.<br/>
+- **nível:** 1-10<br/>
 
 :pizza: Vilão:<br/>
 - nome: Destruidor, Krang, Bebop, etc...<br/>

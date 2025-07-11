@@ -11,37 +11,37 @@ O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal,
 
 ## Descrição Funcional do Sistema
 
-***1.Entidades do Sistema:***
+### 1.Entidades do Sistema:
 
-:pizza: Tartaruga:<br/>
+:pizza: ***Tartaruga:***<br/>
 - **Nome:** Leonardo, Donatello, Raphael, Michelangelo<br/>
 - **Status:** Disponível, Em Missão, Ferido.<br/>
 - **Nível:** 1-10<br/>
 
-:pizza: Vilão:<br/>
+:pizza: ***Vilão:***<br/>
 - **Nome:** Destruidor, Krang, Bebop, etc...<br/>
 - **Nível:** 1-10<br/>
 - **Ponto Fraco**: texto<br/>
 
-:pizza: Missão:<br/> 
+:pizza: ***Missão:***<br/> 
 - **Descrição:** Assalto ao Banco Central, Sequestro do presidente, etc...<br/>
 - **Local:** Centro da cidade, Casa branca, etc...<br/>
 - **Nível:** 1-10<br/>
 >OBS: Descrição de missões e seus respectivos níveis de ameaça são aleatórios, não há um padrão neles.
 
-:pizza: Equipamento:<br/>
+:pizza: ***Equipamento:***<br/>
 - **Nome:** Katanas, Bō, Nunchakus, Sai, Bumerangue-Pizza, Comunicador-Casco<br/>
 
 
-***2. Módulos da Central de Comando:***
+### 2. Módulos da Central de Comando:
 <br/>Aqui estão as funcionalidades que sua Central de Comando deve ter.<br/>
 
-- :pizza: ***Módulo 2.1: O Painel de Alertas de Missões***
+#### :pizza: Módulo 2.1: O Painel de Alertas de Missões
 
     Novas missões são reportadas para a Central a todo momento.<br/>
     Elas chegam de fontes como April O'Neil ou de scanners da polícia.<br/>
 
-- :pizza: ***Módulo 2.2: Os Arquivos de Vilões do Donatello***
+#### :pizza: Módulo 2.2: Os Arquivos de Vilões do Donatello
 
     Donatello mantém um banco de dados sobre cada vilão que já enfrentaram.<br/>
 
@@ -49,15 +49,14 @@ O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal,
     podem precisar consultar informações sobre um inimigo no meio de uma
     batalha.
 
-- :pizza: ***Módulo 2.3: O Diário de Bordo do Mestre Splinter***
+#### :pizza: Módulo 2.3: O Diário de Bordo do Mestre Splinter
 
     Mestre Splinter exige um relatório de todas as missões concluídas para
     analisar o desempenho de seus filhos.
 
-- :pizza: ***Módulo 2.4: O Arsenal e o Plano de Ação***
+#### :pizza: Módulo 2.4: O Arsenal e o Plano de Ação
 
-    Para cada missão iniciada, as Tartarugas precisam de um plano.<br/>
-    A jogador deve poder montar uma lista de equipamentos do arsenal para levar àquela missão especíca.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    Para cada missão iniciada, as Tartarugas precisam de um plano. O jogador deve poder montar uma lista de equipamentos do arsenal para levar aquela missão específica.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

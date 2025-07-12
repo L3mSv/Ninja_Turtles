@@ -1,11 +1,10 @@
 # Ninja Turtles Game in Terminal (CLI)
-![GitHub License](https://img.shields.io/github/license/L3mSv/Ninja_Turtles) ![GitHub watchers](https://img.shields.io/github/watchers/L3mSv/Ninja_Turtles?style=for-the-badge&logo=github) ![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=flat&logo=C&labelColor=black&color=blue) ![Static Badge](https://img.shields.io/badge/-%23A42E2B?style=flat&logo=GNU&labelColor=gray&color=red) ![GitHub last commit](https://img.shields.io/github/last-commit/L3mSv/Ninja_Turtles?color=purple) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/L3mSv/Ninja_Turtles?color=orange)
-
-
-
+![GitHub License](https://img.shields.io/github/license/L3mSv/Ninja_Turtles) ![GitHub watchers](https://img.shields.io/github/watchers/L3mSv/Ninja_Turtles?style=for-the-badge&logo=github) ![GitHub last commit](https://img.shields.io/github/last-commit/L3mSv/Ninja_Turtles?color=purple) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/L3mSv/Ninja_Turtles?color=orange)
 
 
 ![ninja-turtle-pixel](images/ninjas.png)
+
+![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=flat&logo=C&labelColor=black&color=blue) ![Static Badge](https://img.shields.io/badge/-%23A42E2B?style=flat&logo=GNU&labelColor=gray&color=red) 
 
 ## Programmers
 - [Lucas Lemes](https://github.com/L3mSv) 

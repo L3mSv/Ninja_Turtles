@@ -4,7 +4,7 @@
 
 ![ninja-turtle-pixel](images/ninjas.png)
 
-![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=flat&logo=C&labelColor=black&color=blue) ![Static Badge](https://img.shields.io/badge/-%23A42E2B?style=flat&logo=GNU&labelColor=gray&color=red) 
+***Ferramentas Usadas:*** ![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=flat&logo=C&labelColor=black&color=blue) ![Static Badge](https://img.shields.io/badge/-%23A42E2B?style=flat&logo=GNU&labelColor=gray&color=red) 
 
 ## Programmers
 - [Lucas Lemes](https://github.com/L3mSv) 

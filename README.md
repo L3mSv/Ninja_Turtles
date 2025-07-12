@@ -1,5 +1,7 @@
 # Ninja Turtles Game in Terminal (CLI)
-![GitHub License](https://img.shields.io/github/license/L3mSv/Ninja_Turtles) ![GitHub watchers](https://img.shields.io/github/watchers/L3mSv/Ninja_Turtles?style=for-the-badge&logo=github) ![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=for-the-badge&logo=c&labelColor=black&color=%2300255F)
+![GitHub License](https://img.shields.io/github/license/L3mSv/Ninja_Turtles) ![GitHub watchers](https://img.shields.io/github/watchers/L3mSv/Ninja_Turtles?style=for-the-badge&logo=github) !![Static Badge](https://img.shields.io/badge/-%23A8B9CC?style=flat&logo=C&labelColor=black&color=blue) ![Static Badge](https://img.shields.io/badge/-%23A42E2B?style=flat&logo=GNU&labelColor=gray&color=red)
+
+
 
 ![ninja-turtle-pixel](images/ninjas.png)
 

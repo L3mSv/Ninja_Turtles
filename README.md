@@ -8,7 +8,7 @@
 
 ## Programmers
 - [Lucas Lemes](https://github.com/L3mSv) 
-- Felipe 
+- [Felipe H. Larangeira](https://github.com/FelipeHoffnLarangeira) 
 
 ## Introduction
 O objetivo deste projeto é construir um jogo das tartarugas ninjas no terminal, você o **jogador** irá ajudar as tartarugas a restaurarem a paz na cidade de Nova York dando suporte a elas em batalhas contra seus vilões dos desenhos mais marcantes como _O Destruidor_, _Krang_, _Clã do Pé_, _Bebop_ e _Rocksteady_ e outros novos inimigos, por meio de um sistema de computador avançado construido pelo _Donatello_ chamado de **A Central de Comando**, onde você irá gerenciar as missões, catalogar os vilões e otimizar as operações do time.

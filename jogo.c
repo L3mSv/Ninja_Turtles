@@ -2,11 +2,45 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h> //Para sleep no Linux
+#include <windows.h> //Para sleep no Windows
+#include <ctype.h>
+#include <conio.h> // Para getch() no Windows
 #include "bibliotecas/pilha.h"
 #include "utils/utils.h"
 #include "jogo.h"
 
-void Introducao()
+
+// Função para aceitar apenas 'y' ou 'n' (minúsculo), sem ecoar na tela
+char getYN() {
+    char c;
+    while (1) {
+        c = getch();
+        c = tolower(c);
+        if (c == 'y' || c == 'n') {
+            printf("%c\n", c); // Mostra a escolha do usuário
+            return c;
+        }
+    }
+}
+
+void tutorial()
+{
+    printf("\n\033[95mDonatello\033[0m: Welcome to the tutorial!\n");
+    // ... aqui pode colocar o conteúdo do tutorial ...
+}
+
+void commandCentral()
+{
+    printf("-- Command Central --\n\n");
+    printf("[1]. Mission Alerts Panel\n");
+    printf("[2]. Villains DataBase\n");
+    printf("[3]. Master Splinter's Logbook\n");
+    printf("[4]. Arsenal and the Action Plan\n\n");
+}
+
+void introducao()
 {
     print_lento
     ("\033[31mA cidade de Nova York esta um caos\033[0m!\n"
@@ -16,19 +50,48 @@ void Introducao()
     " decidiu criar um sistema de computador avancado, a \033[1m\"Central de Comando\"\033[0m,\n" 
     "para gerenciar as missoes, catalogar os viloes e otimizar as operacoes do time.\n"
     "\nSua missao e ajudar as Tartarugas Ninja a combater o mal sobre Nova York e restaurar a" 
-    " paz atraves de ordens pela Centra de Comando. \033[33mBoa sorte\033[0m\n" , 100);
+    " paz atraves de ordens pela Central de Comando. \033[33mBoa sorte\033[0m\n" , 100);
+
+    sleep(3);
+    cleanTerminal();
+
+    sleep(8);
+
+    printf("\n\033[95mDonatello\033[0m: Hey, thanks god you got the Command Central and in the best time, things around here are not very good.\n");
+
+    sleep(5);
+
+    printf("\n\033[95mDonatello\033[0m: While me and my brothers were in a special mission New York was ruined, There are villians all places!\n");
+
+    sleep(5);
+
+    printf("\n\033[95mDonatello\033[0m: We are going to Sewer Liar to see if is okay.\n");
+
+    sleep(5);
+
+    printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
+    printf("\nGo to Tutorial: [Y] yes | [N] no ");
+
+    char tutorialChoice = getYN();
+    if (tutorialChoice == 'y') {
+        tutorial();
+    } else {
+        printf("\n\033[95mDonatello\033[0m: So, see you later!\n");
+        sleep(3);
+        cleanTerminal();
+        commandCentral();
+    }
+}
+
+
+void cleanTerminal()
+{
+    system("clear"); //limpa tela para Linux/macOS
+    system("cls"); //Limpa tela para Windows
 }
 
 int main(){
-    system("clear"); //limpa tela para Linux/macOS
-    system("cls"); //Limpa tela para Windows
 
-    Introducao();
-
-    fala_aleatoria("Donatello", "falas/donatello.txt");
-    fala_aleatoria("Rafael", "falas/rafael.txt");
-    fala_aleatoria("Leonardo", "falas/leonardo.txt");
-    fala_aleatoria("Michelangelo", "falas/michelangelo.txt");
-
-     
+    cleanTerminal();
+    introducao();
 }

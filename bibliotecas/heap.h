@@ -13,7 +13,7 @@ void build_max_heap(Heap* heap);
 void swap(int* a, int* b);
 void insertHeap(Heap* heap, int value);
 void printHeap(Heap* heap);
-void deleteKey(Heap* heap, int index)
+void deleteKey(Heap* heap, int index);
 
 
 #endif HEAP_H

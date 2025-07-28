@@ -3,9 +3,11 @@
 #include <limits.h>
 #include "../bibliotecas/pilha.h"
 
-Nodo* criaNodo(int novoValor){
+Nodo* criaNodo(const char* locals, int level, const char* descriptions){
     Nodo* novoNodo = (Nodo*) malloc(sizeof(Nodo));
-    novoNodo->valor = novoValor;
+    novoNodo->locals = locals;
+    novoNodo->level = level;
+    novoNodo->descriptions = descriptions;
     novoNodo->prox = NULL;
     return novoNodo;
 }
@@ -18,8 +20,8 @@ int pilhaVazia(Pilha* p){
     return p->topo == NULL;
 }
 
-void push(Pilha* p, int valor){
-    Nodo* novoNodo = criaNodo(valor);
+void push(Pilha* p, const char* locals, int level, const char* descriptions){
+    Nodo* novoNodo = criaNodo(locals, level, descriptions);
 
     if(!novoNodo){
         printf("\nOverflow na pilha!");
@@ -52,7 +54,10 @@ void liberaPilha(Pilha* p){
     printf("\nPilha Liberada!");
 }
 
-int pegaTopoPilha(Pilha* p){
+/*
+NAO PARECE TER UTILIDADE AGORA, MAS POR VIA DE DUVIDA DEIXA Ai
+
+Nodo* pegaTopoPilha(Pilha* p){
     if(!pilhaVazia(p))
     {
         return p->topo->valor;
@@ -62,14 +67,19 @@ int pegaTopoPilha(Pilha* p){
         return INT_MIN;
     }
 }
+*/
 
 void imprimePilha(Pilha* p){
     Nodo* temp = p->topo;
     printf("Pilha (de cima para baixo): ");
     while(temp->prox != NULL)
     {
-        printf(" %d ->", temp->valor);
+        printf("\n%s ->", temp->locals);
+        printf("\n%d ->", temp->level);
+        printf("\n%s ->", temp->descriptions);
         temp = temp->prox;
     }
-    printf(" %d ", temp->valor);
+    printf("\n%d ", temp->locals);
+    printf("\n%d ", temp->level);
+    printf("\n%d ", temp->descriptions);
 }

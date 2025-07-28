@@ -9,7 +9,11 @@
 #include <conio.h> // Para getch() no Windows
 #include "bibliotecas/pilha.h"
 #include "utils/utils.h"
+#include "bibliotecas/heap.h"
 #include "jogo.h"
+
+const char* DESCRIPTIONS_PATH = "descriptions.txt";
+const char* LOCALS_PATH = "locals.txt";
 
 
 // Função para aceitar apenas 'y' ou 'n' (minúsculo), sem ecoar na tela
@@ -40,7 +44,7 @@ void commandCentral()
     printf("[4]. Arsenal and the Action Plan\n\n");
 }
 
-void introducao()
+void introduction()
 {
     print_lento
     ("\033[31mA cidade de Nova York esta um caos\033[0m!\n"
@@ -90,8 +94,43 @@ void cleanTerminal()
     system("cls"); //Limpa tela para Windows
 }
 
+Mission* createMission(const char* local, int level, const char* description)
+{
+    FILE* descriptionsFile = fopen(DESCRIPTIONS_PATH, "r");
+    if(descriptionsFile == NULL)
+    {
+        perror("ERROR in try to open descriptions file");
+        return;
+    }
+
+    FILE* localsFile = fopen(LOCALS_PATH, "r");
+    if(localsFile == NULL)
+    {
+        perror("ERROR in try to open locals file");
+        return;
+    }
+
+    char* descriptions[100];
+    int descriptions_count = 0;
+    char descriptions_linhas[256];
+
+    while(fgets(descriptions_linhas, sizeof(descriptions_linhas), descriptionsFile))
+    {
+        descriptions[descriptions_count] = malloc(strlen(descriptions_linhas) + 1);
+        if(descriptions[descriptions_count])
+        {
+            strcpy(descriptions[descriptions_count], descriptions_linhas);
+            descriptions_count++;
+        }
+    }
+
+    Mission* mission = (Mission*) malloc(sizeof(Mission));
+}
+
 int main(){
 
     cleanTerminal();
     introducao();
+
+    Heap* heap = createHeap(10);
 }

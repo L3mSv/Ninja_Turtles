@@ -6,9 +6,9 @@
 Heap* createHeap(int capacity)
 {
     Heap* heap = (Heap*) malloc(sizeof(Heap));
-    heap ->size = 0;
-    heap -> capacity = capacity;
-    heap -> array = (int*) malloc(capacity * sizeof(int));
+    heap->size = 0;
+    heap->capacity = capacity;
+    heap->array = (struct Mission*) malloc(capacity * sizeof(Mission));
     return heap;
 }
 
@@ -24,10 +24,10 @@ void max_heapify(Heap* heap, int i){
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
-    if(left < heap->size && heap->array[left] > heap->array[largest])
+    if(left < heap->size && heap->array[left].level > heap->array[largest].level)
         largest = left;
 
-    if(right < heap->size && heap->array[right] > heap->array[largest])
+    if(right < heap->size && heap->array[right].level > heap->array[largest].level)
         largest = right;
     
     if(largest != i)
@@ -43,7 +43,7 @@ void build_max_heap(Heap* heap)
         max_heapify(heap, i);
 }
 
-void insertHeap(Heap* heap, int value)
+void insertHeap(Heap* heap, struct Mission* mission)
 {
     if(heap->size == heap->capacity)
     {
@@ -53,9 +53,9 @@ void insertHeap(Heap* heap, int value)
 
     heap -> size++;
     int i = heap->size - 1;
-    heap->array[i] = value;
+    heap->array[i] = *mission;
 
-    while(i != 0 && heap->array[(i-1)/2] < heap->array[i])
+    while(i != 0 && heap->array[(i-1)/2].level < heap->array[i].level)
     {
         swap(&heap->array[i], &heap->array[(i-1)/2]);
         i = (i - 1)/2;

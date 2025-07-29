@@ -22,4 +22,4 @@ void printHeap(Heap* heap);
 void deleteKey(Heap* heap, int index);
 
 
-#endif HEAP_H
+#endif 

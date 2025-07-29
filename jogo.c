@@ -94,25 +94,37 @@ void cleanTerminal()
     system("cls"); //Limpa tela para Windows
 }
 
-Mission* createMission(const char* local, int level, const char* description)
+Mission* createMission(const char* local, const char* description)
 {
+    Mission* mission = (Mission*) malloc(sizeof(Mission));
+
     FILE* descriptionsFile = fopen(DESCRIPTIONS_PATH, "r");
     if(descriptionsFile == NULL)
     {
         perror("ERROR in try to open descriptions file");
-        return;
+        mission->description = NULL;
+        mission->local = NULL;
+        mission->level = 0;
+        return mission;
     }
 
     FILE* localsFile = fopen(LOCALS_PATH, "r");
     if(localsFile == NULL)
     {
         perror("ERROR in try to open locals file");
-        return;
+        mission->description = NULL;
+        mission->local = NULL;
+        mission->level = 0;
+        return mission;
     }
 
     char* descriptions[100];
     int descriptions_count = 0;
     char descriptions_linhas[256];
+
+    char* locals[100];
+    int locals_count = 0;
+    char locals_linhas[256];
 
     while(fgets(descriptions_linhas, sizeof(descriptions_linhas), descriptionsFile))
     {
@@ -124,13 +136,69 @@ Mission* createMission(const char* local, int level, const char* description)
         }
     }
 
+    while(fgets(locals_linhas, sizeof(locals_linhas), localsFile))
+    {
+        locals[locals_count] = malloc(strlen(locals_linhas) + 1);
+        if(locals[locals_count])
+        {
+            strcpy(locals[locals_count], locals_linhas);
+            locals_count++;
+        }
+    }
+
+    if(descriptions_count != 0 && locals_count != 0)
+    {
+        srand(time(NULL));
+        int description_choice = rand() % descriptions_count;
+        int locals_choice = rand() % locals_count;
+        int level_choice = (rand() % 10) + 1;
+
+        mission->description = descriptions[description_choice];
+        mission->local = locals[locals_choice];
+        mission->level = level_choice;
+    }
+
+    return mission;
+}
+
+void missionPanel()
+{
+    cleanTerminal();
+
+    int missions_count = 0;
+
     Mission* mission = (Mission*) malloc(sizeof(Mission));
+    mission = createMission(LOCALS_PATH, DESCRIPTIONS_PATH);
+    missions_count++;
+
+    printf("+-----------------------------------------------------------------------+\n");
+    printf("|MISSION PANEL                                                          |\n");
+
+    if(missions_count == 0)
+    {
+        printf("+-----------------------------------------------------------------------+\n");
+        printf("|Sorry, but we don't have any mission... 🐢                             |\n");
+        printf("+-----------------------------------------------------------------------+\n");
+    }
+    else
+    {
+        printf("+-----------------------------------------------------------------------+\n");
+        printf("|                                                                       |\n");
+        printf(" [%d]                                                                      \n", missions_count);
+        printf(" Local: %s                                                                 \n", mission->local);
+        printf(" Description: %s                                                           \n", mission->description);
+        printf(" Level: %d                                                                 \n", mission->level);
+        printf("|                                                                       |\n");
+        printf("+-----------------------------------------------------------------------+\n");       
+    }
+
+
 }
 
 int main(){
 
     cleanTerminal();
-    introducao();
 
-    Heap* heap = createHeap(10);
+    missionPanel();
+    return 0;
 }

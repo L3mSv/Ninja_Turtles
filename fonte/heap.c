@@ -12,9 +12,9 @@ Heap* createHeap(int capacity)
     return heap;
 }
 
-void swap(int* a, int* b)
+void swap(struct Mission* a, struct Mission* b)
 {
-    int temp = *a;
+    struct Mission temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -31,8 +31,10 @@ void max_heapify(Heap* heap, int i){
         largest = right;
     
     if(largest != i)
+    {
         swap(&heap->array[i], &heap->array[largest]);
         max_heapify(heap, largest);
+    }
 }
 
 void build_max_heap(Heap* heap)
@@ -65,7 +67,11 @@ void insertHeap(Heap* heap, struct Mission* mission)
 void printHeap(Heap* heap)
 {
     for(int i = 0; i < heap->size; ++i)
-        printf("%d ", heap->array[i]);
+    {
+        printf("Local: %s ", heap->array[i].local);
+        printf("Description: %s ", heap->array[i].description);
+        printf("Level: %d \n\n", heap->array[i].level);
+    }
     printf("\n");
 }
 

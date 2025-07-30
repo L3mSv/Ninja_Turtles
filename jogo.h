@@ -8,8 +8,9 @@ void tutorial();
 void commandCentral();
 void cleanTerminal();
 Mission* createMission(const char* local, const char* description);
-void missionPanel();
-void addMissionToPanel(int numMissions);
-void showMissions();
+void missionPanel(Heap* heap, int numMissions);
+Heap* createPanel();
+int addMissionToPanel(Heap* heap, int numMissions);
+void showMissions(Heap* heap);
 
 #endif 

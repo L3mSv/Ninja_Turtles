@@ -37,11 +37,14 @@ void tutorial()
 
 void commandCentral()
 {
+    cleanTerminal();
+
     printf("-- Command Central --\n\n");
     printf("[1]. Mission Alerts Panel\n");
     printf("[2]. Villains DataBase\n");
     printf("[3]. Master Splinter's Logbook\n");
     printf("[4]. Arsenal and the Action Plan\n\n");
+
 }
 
 void introduction()
@@ -161,44 +164,69 @@ Mission* createMission(const char* local, const char* description)
     return mission;
 }
 
-void missionPanel()
+void missionPanel(Heap* heap, int numMissions)
 {
     cleanTerminal();
 
-    int missions_count = 0;
-
-    Mission* mission = (Mission*) malloc(sizeof(Mission));
-    mission = createMission(LOCALS_PATH, DESCRIPTIONS_PATH);
-    missions_count++;
-
     printf("+-----------------------------------------------------------------------+\n");
     printf("|MISSION PANEL                                                          |\n");
+    printf("+-----------------------------------------------------------------------+\n");
 
-    if(missions_count == 0)
+    if(heap->size == 0)
     {
-        printf("+-----------------------------------------------------------------------+\n");
-        printf("|Sorry, but we don't have any mission... 🐢                             |\n");
-        printf("+-----------------------------------------------------------------------+\n");
+        printf("Sorry, but we don't have any mission... 🐢\n");
     }
     else
     {
-        printf("+-----------------------------------------------------------------------+\n");
-        printf("|                                                                       |\n");
-        printf(" [%d]                                                                      \n", missions_count);
-        printf(" Local: %s                                                                 \n", mission->local);
-        printf(" Description: %s                                                           \n", mission->description);
-        printf(" Level: %d                                                                 \n", mission->level);
-        printf("|                                                                       |\n");
-        printf("+-----------------------------------------------------------------------+\n");       
+        showMissions(heap);
     }
 
 
+}
+
+Heap* createPanel(){
+    Heap* heap = createHeap(10);
+    return heap;
+}
+
+int addMissionToPanel(Heap* heap, int numMissions){
+
+    Mission* mission = createMission(LOCALS_PATH, DESCRIPTIONS_PATH);
+
+    if(heap->size < heap->capacity)
+    {
+        if(mission != NULL && (mission->description != NULL || mission->local != NULL))
+        {
+            insertHeap(heap, mission);
+            return heap->size;
+        }
+    }
+    else
+    {
+        printf("Error creating mission. Not adding to panel.\n");
+        if(mission != NULL)
+        {
+            free(mission);
+        }
+    }
+
+    return numMissions;
+}
+
+void showMissions(Heap* heap){
+    printHeap(heap);
 }
 
 int main(){
 
     cleanTerminal();
 
-    missionPanel();
+    Heap* Panel = createPanel();
+    int numMissions = 0;
+
+    numMissions = addMissionToPanel(Panel, numMissions);
+    numMissions = addMissionToPanel(Panel, numMissions);
+    missionPanel(Panel, Panel->size);
+
     return 0;
 }

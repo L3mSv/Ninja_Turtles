@@ -79,7 +79,7 @@ void imprimePilha(Pilha* p){
         printf("\n%s ->", temp->descriptions);
         temp = temp->prox;
     }
-    printf("\n%d ", temp->locals);
+    printf("\n%s ", temp->locals);
     printf("\n%d ", temp->level);
-    printf("\n%d ", temp->descriptions);
+    printf("\n%s ", temp->descriptions);
 }

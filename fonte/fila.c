@@ -6,51 +6,55 @@
     struct Node *next;
  }node;
 
- void addnode(node **list, int n){
+ void addnode_to_row(node **row, int n){
     node *newnode = (node*)malloc(sizeof(node));
     
     if(!newnode){
         printf("Erro ao alocar memória para newnode./n");
         return;
     }
-
+    node *temp = *row;
     newnode->data = n;
-    newnode->next = NULL;
+    newnode->next = temp;
+    (*row) = newnode;
 
-    if(!(*list)){
-        *list = newnode;
-        return;
-    }
-    node *temp = *list;
-    while(!temp->next){
-        temp = temp->next;
-    }
-    temp = newnode;
     return;
  }
 
- void printlist(node *list){
-    if(!list){
-        printf("Error, list is NULL\n");
+ void printrow(node *row){
+    if(!row){
+        printf("Error, row is NULL\n");
         return;
     }
-    while(list){
-        printf("[%d]->", list->data);
-        list = list->next;
+    while(row){
+        printf("[%d]->", row->data);
+        row = row->next;
     }
     printf("[NULL]\n");
     return;
  }
 
- void freelist(node **list){
-    if(*list == NULL) return;
+ void freerow(node **row){
+    if(*row == NULL) return;
 
     node *temp;
 
-    while(*list != NULL){
-        temp = *list;
-        *list = (*list)->next;
+    while(*row != NULL){
+        temp = *row;
+        *row = (*row)->next;
         free(temp);
     }
     return;
+}
+
+void remove_from_row(node **row){
+    node *temp = *row;
+    node *aux = NULL;
+
+    while(temp->next->next){
+        temp = temp->next;    
+    }
+    aux = temp->next;
+        temp->next = NULL;
+        free(aux);
 }

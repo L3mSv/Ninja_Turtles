@@ -10,7 +10,7 @@
     node *newnode = (node*)malloc(sizeof(node));
     
     if(!newnode){
-        printf("Erro ao alocar memória para newnode./n");
+        printf("Erro ao alocar memória para newnode.\n");
         return;
     }
 
@@ -22,10 +22,11 @@
         return;
     }
     node *temp = *head;
-    while(!temp->next){
+
+    while(temp->next){
         temp = temp->next;
     }
-    temp = newnode;
+    temp->next = newnode;
     return;
  }
 
@@ -60,8 +61,17 @@ void remove_node_by_index(node **head, int index){
 
     node *temp = *head;
     int i = 0;
-    while(i < index - 1){
+
+    if (index == 0) {
+        node *old = *head;
+        *head = old->next;
+        free(old);
+        return;
+    }
+
+    while(i < index - 1 && temp->next){
         temp = temp->next;
+        i++;
     }
     node *temp2 = temp->next;
     temp->next = temp->next->next;
@@ -74,19 +84,27 @@ void remove_node_by_value(node **head, int n){ // removes all nodes that contain
     if(!(*head)) return;
 
     node *temp = *head;
-    int *indexes = (int*)malloc(sizeof(int)); // array to store the indexes that the number appears
+    int *indexes = NULL;
     int j = 0, i = 0; //counters: j=generic index ; i=size of the vector
 
-    while(temp->next){
+    while(temp){
         if(temp->data == n){
-            i++;
-            realloc(indexes, i*sizeof(int));
+            int *tmp = realloc(indexes, (i+1)*sizeof *tmp);
+            if (!tmp) {
+              free(indexes);
+              return;
+            }
+            indexes = tmp;
             indexes[i] = j;
+            i++;
         }
         temp = temp->next;
         j++;
     }
-    for(int k = 0; k < i; k++){
-        remove_node_by_index(head, indexes[i]);
+    for(int k = i -1; k >= 0; k--){
+        remove_node_by_index(head, indexes[k]);
     }
+
+    free(indexes);
+
 }

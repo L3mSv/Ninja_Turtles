@@ -16,5 +16,5 @@ utils.o: utils/utils.c utils/utils.h
 
 
 clean:
-	del /Q *.o *.exe *~ all
-	rm -rf *.o *.exe *~ all
+	-del /Q *.o *.exe *~ all
+	-rm -rf *.o *.exe *~ all

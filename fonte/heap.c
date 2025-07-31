@@ -68,6 +68,7 @@ void printHeap(Heap* heap)
 {
     for(int i = 0; i < heap->size; ++i)
     {
+        printf("\nID[%d]-------------\n", i);
         printf("Local: %s ", heap->array[i].local);
         printf("Description: %s ", heap->array[i].description);
         printf("Level: %d \n\n", heap->array[i].level);

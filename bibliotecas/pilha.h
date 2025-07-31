@@ -2,9 +2,9 @@
 #define PILHA_H
 
 typedef struct Nodo{
-    char* locals;
+    const char* locals;
     int level;
-    char* descriptions;
+    const char* descriptions;
     struct Nodo* prox;
 }Nodo;
 

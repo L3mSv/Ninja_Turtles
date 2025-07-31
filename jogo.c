@@ -15,6 +15,9 @@
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
 
+Heap* Panel;
+int numMissions;
+
 
 // Função para aceitar apenas 'y' ou 'n' (minúsculo), sem ecoar na tela
 char getYN() {
@@ -39,12 +42,20 @@ void commandCentral()
 {
     cleanTerminal();
 
-    printf("-- Command Central --\n\n");
-    printf("[1]. Mission Alerts Panel\n");
-    printf("[2]. Villains DataBase\n");
-    printf("[3]. Master Splinter's Logbook\n");
-    printf("[4]. Arsenal and the Action Plan\n\n");
+    while(1)
+    {
+        printf("-- Command Central --\n\n");
+        printf("[1]. Mission Alerts Panel\n");
+        printf("[2]. Villains DataBase\n");
+        printf("[3]. Master Splinter's Logbook\n");
+        printf("[4]. Arsenal and the Action Plan\n\n");
 
+        int choice_modules;
+        scanf("%d", &choice_modules);
+
+        if(choice_modules == 1)
+            missionPanel();
+    }
 }
 
 void introduction()
@@ -151,7 +162,6 @@ Mission* createMission(const char* local, const char* description)
 
     if(descriptions_count != 0 && locals_count != 0)
     {
-        srand(time(NULL));
         int description_choice = rand() % descriptions_count;
         int locals_choice = rand() % locals_count;
         int level_choice = (rand() % 10) + 1;
@@ -164,46 +174,50 @@ Mission* createMission(const char* local, const char* description)
     return mission;
 }
 
-void missionPanel(Heap* heap, int numMissions)
+void missionPanel()
 {
     cleanTerminal();
 
     printf("+-----------------------------------------------------------------------+\n");
     printf("|MISSION PANEL                                                          |\n");
-    printf("+-----------------------------------------------------------------------+\n");
+    printf("+-----------------------------------------------------------------------+\n\n");
 
-    if(heap->size == 0)
+    if(Panel->size == 0)
     {
         printf("Sorry, but we don't have any mission... 🐢\n");
     }
     else
     {
-        showMissions(heap);
+        showMissions();
+        selectMission();
     }
 
+    printf("\n[ESC] Back\n");
+    while(getch() != 27); // 27 ascii code to esc
+
+    commandCentral();
 
 }
 
-Heap* createPanel(){
-    Heap* heap = createHeap(10);
-    return heap;
+void createPanel(){
+    Panel = createHeap(10);
 }
 
-int addMissionToPanel(Heap* heap, int numMissions){
+int addMissionToPanel(){
 
     Mission* mission = createMission(LOCALS_PATH, DESCRIPTIONS_PATH);
 
-    if(heap->size < heap->capacity)
+    if(Panel->size < Panel->capacity)
     {
         if(mission != NULL && (mission->description != NULL || mission->local != NULL))
         {
-            insertHeap(heap, mission);
-            return heap->size;
+            insertHeap(Panel, mission);
+            return Panel->size;
         }
     }
     else
     {
-        printf("Error creating mission. Not adding to panel.\n");
+        printf("Error creating mission. Not adding to Panel.\n");
         if(mission != NULL)
         {
             free(mission);
@@ -213,15 +227,46 @@ int addMissionToPanel(Heap* heap, int numMissions){
     return numMissions;
 }
 
-void showMissions(Heap* heap){
-    printHeap(heap);
+void showMissions(){
+    printHeap(Panel);
+}
+
+void selectMission(){
+    int choiceMission;
+    scanf("%d", &choiceMission);
+
+    if(choiceMission < 0 || choiceMission >= Panel->size)
+    {
+        printf("\nInvalid mission index!\n");
+        return;
+    }
+    battle(Panel->array[choiceMission]);
+    deleteKey(Panel, choiceMission);
+}
+
+void battle(struct Mission mission){
+    printf("in working....");
+}
+
+void arsenal(){
+    
 }
 
 int main(){
-
+    srand(time(NULL));
     cleanTerminal();
 
+<<<<<<< HEAD
     introduction();
+=======
+    createPanel();
+    numMissions = 0;
+
+    numMissions = addMissionToPanel();
+    numMissions = addMissionToPanel();
+
+    commandCentral();
+>>>>>>> origin/main
 
     return 0;
 }

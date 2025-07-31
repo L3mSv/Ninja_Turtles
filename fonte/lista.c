@@ -1,12 +1,15 @@
  #include <stdio.h>
  #include <stdlib.h>
+ #include "../bibliotecas/lista.h"
 
- typedef struct Node{
-    int data;
-    struct Node *next;
- }node;
+ node* turtle_list;
+ node* weapon_list; 
 
- void add_node(node **head, int n){
+ void createList(node** head){
+    head = NULL;
+ }
+
+ void add_node(node **head, const char* n){
     node *newnode = (node*)malloc(sizeof(node));
     
     if(!newnode){
@@ -36,7 +39,7 @@
         return;
     }
     while(head){
-        printf("[%d]->", head->data);
+        printf("[%s]->", head->data);
         head = head->next;
     }
     printf("[NULL]\n");
@@ -80,7 +83,7 @@ void remove_node_by_index(node **head, int index){
     return;
 }
 
-void remove_node_by_value(node **head, int n){ // removes all nodes that contain that specified value
+void remove_node_by_value(node **head, const char* n){ // removes all nodes that contain that specified value
     if(!(*head)) return;
 
     node *temp = *head;

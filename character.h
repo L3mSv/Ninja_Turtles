@@ -9,5 +9,6 @@ typedef struct Character{
 }Character;
 
 
-Character* createCharacter(const char* name, char* status, const char* type, int level);
+void createCharacter(const char* name, char* status, const char* type, int level);
+void verifyStatus(Character* character);
 #endif 

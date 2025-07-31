@@ -6,6 +6,6 @@ typedef struct Weapon
     const char* name;
 }Weapon;
 
-Weapon* createWeapon(const char* name);
+void createWeapon(const char* name);
 
-#endif;
+#endif

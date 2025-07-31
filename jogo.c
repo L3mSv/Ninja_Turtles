@@ -10,6 +10,8 @@
 #include "bibliotecas/pilha.h"
 #include "utils/utils.h"
 #include "bibliotecas/heap.h"
+#include "bibliotecas/lista.h"
+#include "character.h"
 #include "jogo.h"
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
@@ -49,13 +51,48 @@ void commandCentral()
         printf("[2]. Villains DataBase\n");
         printf("[3]. Master Splinter's Logbook\n");
         printf("[4]. Arsenal and the Action Plan\n\n");
+        printf("\n\n[5]. Exit");
 
         int choice_modules;
         scanf("%d", &choice_modules);
 
         if(choice_modules == 1)
             missionPanel();
+        else if(choice_modules == 4)
+        {
+            arsenal();
+        }
+        else if(choice_modules == 5)
+        {
+            exit();
+        }
     }
+}
+
+void exit()
+{
+    cleanTerminal();
+
+    printf("Are you really want exit ?\n\n");
+    printf("[Y] Yes | [N] No");
+    char exitChoice = getYN();
+    if(exitChoice == 'y')
+    {
+        printf("Exiting program...\n");
+        sleep(3);
+        exit(0);
+    }
+    else{
+        commandCentral();
+    }
+}
+
+void back()
+{
+    printf("\n[ESC] Back\n");
+    while(getch() != 27); // 27 ascii code to esc
+
+    commandCentral();
 }
 
 void introduction()
@@ -192,10 +229,7 @@ void missionPanel()
         selectMission();
     }
 
-    printf("\n[ESC] Back\n");
-    while(getch() != 27); // 27 ascii code to esc
-
-    commandCentral();
+    back();
 
 }
 
@@ -249,24 +283,35 @@ void battle(struct Mission mission){
 }
 
 void arsenal(){
-    
+    printf("+-----------------------------------------------------------------------+\n");
+    printf("|ARSENAL                                                                |\n");
+    printf("+-----------------------------------------------------------------------+\n\n");
+
+    printf("\nTurtles:\n");
+    print_list(turtle_list);
+
+    printf("\n\nWeapons:\n");
+    print_list(weapon_list);
+
+    back();
 }
 
 int main(){
     srand(time(NULL));
     cleanTerminal();
 
-<<<<<<< HEAD
-    introduction();
-=======
     createPanel();
+    createList(&turtle_list);
+    createList(&weapon_list);
+
+    add_node(&turtle_list, "Leonardo");
+
     numMissions = 0;
 
     numMissions = addMissionToPanel();
     numMissions = addMissionToPanel();
 
     commandCentral();
->>>>>>> origin/main
 
     return 0;
 }

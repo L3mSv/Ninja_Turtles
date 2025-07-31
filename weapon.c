@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "weapon.h"
+#include "bibliotecas/lista.h"
 
-Weapon* createWeapon(const char* name)
+void createWeapon(const char* name)
 {
     Weapon* newWeapon = (Weapon*) malloc(sizeof(Weapon));
     newWeapon->name = name;
 
-    return newWeapon;
+    add_node(&weapon_list, newWeapon->name); 
 }

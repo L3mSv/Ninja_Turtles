@@ -221,12 +221,7 @@ int main(){
 
     cleanTerminal();
 
-    Heap* Panel = createPanel();
-    int numMissions = 0;
-
-    numMissions = addMissionToPanel(Panel, numMissions);
-    numMissions = addMissionToPanel(Panel, numMissions);
-    missionPanel(Panel, Panel->size);
+    introduction();
 
     return 0;
 }

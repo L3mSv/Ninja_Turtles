@@ -6,7 +6,7 @@ typedef struct Node{
     struct Node *next;
 }node;
 
-extern node* turtle_list;
+extern node* character_list;
 extern node* weapon_list;
 
 void createList(node **head);

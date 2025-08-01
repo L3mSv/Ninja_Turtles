@@ -28,8 +28,23 @@ char getYN() {
         c = getch();
         c = tolower(c);
         if (c == 'y' || c == 'n') {
-            printf("%c\n", c); // Mostra a escolha do usuário
+            //printf("%c\n", c); //Mostra a escolha do usuário
             return c;
+        }
+    }
+}
+
+// Função para aceitar apenas numeros de 1 a 5, sem ecoar na tela
+int getModuleChoice() {
+    char c;
+    int choice;
+
+    while (1) {
+        c = getch(); // Captura a tecla imediatamente
+        if (c >= '1' && c <= '5') {
+            choice = c - '0'; // Converte o caractere para o número inteiro correspondente
+            // printf("%d\n", choice); // Opcional: Mostra a escolha do usuário na tela
+            return choice;
         }
     }
 }
@@ -51,10 +66,9 @@ void commandCentral()
         printf("[2]. Villains DataBase\n");
         printf("[3]. Master Splinter's Logbook\n");
         printf("[4]. Arsenal and the Action Plan\n\n");
-        printf("\n\n[5]. Exit");
+        printf("[5]. Leave\n\n");
 
-        int choice_modules;
-        scanf("%d", &choice_modules);
+        int choice_modules = getModuleChoice();
 
         if(choice_modules == 1)
             missionPanel();
@@ -64,21 +78,22 @@ void commandCentral()
         }
         else if(choice_modules == 5)
         {
-            exit();
+            leave();
         }
     }
 }
 
-void exit()
+void leave()
 {
     cleanTerminal();
 
     printf("Are you really want exit ?\n\n");
-    printf("[Y] Yes | [N] No");
+    printf("[Y] Yes | [N] No\n\n");
     char exitChoice = getYN();
     if(exitChoice == 'y')
     {
-        printf("Exiting program...\n");
+        cleanTerminal();
+        printf("\nExiting program...\n");
         sleep(3);
         exit(0);
     }
@@ -283,12 +298,14 @@ void battle(struct Mission mission){
 }
 
 void arsenal(){
+    cleanTerminal();
+
     printf("+-----------------------------------------------------------------------+\n");
-    printf("|ARSENAL                                                                |\n");
+    printf("|ARSENAL AND THE ACTION PLAN                                            |\n");
     printf("+-----------------------------------------------------------------------+\n\n");
 
     printf("\nTurtles:\n");
-    print_list(turtle_list);
+    print_list(character_list);
 
     printf("\n\nWeapons:\n");
     print_list(weapon_list);
@@ -301,10 +318,10 @@ int main(){
     cleanTerminal();
 
     createPanel();
-    createList(&turtle_list);
+    createList(&character_list);
     createList(&weapon_list);
 
-    add_node(&turtle_list, "Leonardo");
+    add_node(&character_list, "Leonardo");
 
     numMissions = 0;
 

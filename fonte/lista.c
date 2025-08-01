@@ -2,7 +2,7 @@
  #include <stdlib.h>
  #include "../bibliotecas/lista.h"
 
- node* turtle_list;
+ node* character_list;
  node* weapon_list; 
 
  void createList(node** head){

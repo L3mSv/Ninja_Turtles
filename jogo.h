@@ -15,7 +15,7 @@ void showMissions();
 void selectMission();
 void battle(struct Mission mission);
 void arsenal();
-void exit();
+void leave();
 void back();
 
 #endif 

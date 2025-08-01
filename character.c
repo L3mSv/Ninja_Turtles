@@ -13,7 +13,7 @@ void createCharacter(const char* name, char* status, const char* type, int level
     newCharacter->type = type;
     newCharacter->level = level;
 
-    add_node(&turtle_list, newCharacter->name);
+    add_node(&character_list, newCharacter->name);
 }
 
 void verifyStatus(Character* character){
@@ -22,14 +22,18 @@ void verifyStatus(Character* character){
         return;
     }
 
-    char lowerStatus[50]; 
+    char lowerStatus[50];
+    char lowerType[50];
     strcpy(lowerStatus, character->status); 
+    strcpy(lowerType, character->type);
 
-    for (int i = 0; lowerStatus[i]; i++) {
+    for (int i = 0; lowerStatus[i]; ++i) 
         lowerStatus[i] = tolower(lowerStatus[i]);
-    }
+
+    for(int i = 0; lowerType[i]; ++i)
+        lowerType[i] = tolower(lowerType[i]);
     
-    if (strcmp(lowerStatus, "available") == 0)
+    if (strcmp(lowerStatus, "available") == 0 && strcmp(lowerType, "hero") == 0)
     {
         printf("%s - ", character->name);
     }

@@ -31,6 +31,30 @@ char getYN() {
             //printf("%c\n", c); //Mostra a escolha do usuário
             return c;
         }
+        if(c == 27) // 27 ascii code to esc
+        {
+            back(); 
+        }
+    }
+}
+
+// Função mais genérica para obter uma escolha
+char getChoice(int min_char, int max_char)
+{
+    char c;
+    while(1){
+        c = getch();
+        c = tolower(c);
+
+        if(c >= min_char && c <= max_char)
+        {
+            return c;
+        }
+
+        if(c == 27)
+        {
+            commandCentral();
+        }
     }
 }
 
@@ -45,6 +69,29 @@ int getModuleChoice() {
             choice = c - '0'; // Converte o caractere para o número inteiro correspondente
             // printf("%d\n", choice); // Opcional: Mostra a escolha do usuário na tela
             return choice;
+        }
+        if(c == 27) // 27 ascii code to esc
+        {
+            back(); 
+        }
+    }
+}
+
+// Função para aceitar apenas numeros de 1 a 10 para escolher a missao ou esc para sair, sem ecoar na tela
+int getMission() {
+    char c;
+    int choice;
+
+    while (1) {
+        c = getch(); // Captura a tecla imediatamente
+        if (c >= '1' && c <= '9') {
+            choice = c - '0'; // Converte o caractere para o número inteiro correspondente
+            // printf("%d\n", choice); // Opcional: Mostra a escolha do usuário na tela
+            return choice;
+        }
+        if(c == 27) // 27 ascii code to esc
+        {
+            back(); 
         }
     }
 }
@@ -68,15 +115,15 @@ void commandCentral()
         printf("[4]. Arsenal and the Action Plan\n\n");
         printf("[5]. Leave\n\n");
 
-        int choice_modules = getModuleChoice();
+        char choice_modules = getChoice('1', '5');
 
-        if(choice_modules == 1)
+        if(choice_modules == '1')
             missionPanel();
-        else if(choice_modules == 4)
+        else if(choice_modules == '4')
         {
             arsenal();
         }
-        else if(choice_modules == 5)
+        else if(choice_modules == '5')
         {
             leave();
         }
@@ -89,7 +136,7 @@ void leave()
 
     printf("Are you really want exit ?\n\n");
     printf("[Y] Yes | [N] No\n\n");
-    char exitChoice = getYN();
+    char exitChoice = getChoice('n', 'y');
     if(exitChoice == 'y')
     {
         cleanTerminal();
@@ -97,16 +144,13 @@ void leave()
         sleep(3);
         exit(0);
     }
-    else{
+    if(exitChoice == 'n'){
         commandCentral();
     }
 }
 
 void back()
 {
-    printf("\n[ESC] Back\n");
-    while(getch() != 27); // 27 ascii code to esc
-
     commandCentral();
 }
 
@@ -142,7 +186,7 @@ void introduction()
     printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
     printf("\nGo to Tutorial: [Y] yes | [N] no ");
 
-    char tutorialChoice = getYN();
+    char tutorialChoice = getChoice('n', 'y');
     if (tutorialChoice == 'y') {
         tutorial();
     } else {
@@ -226,25 +270,75 @@ Mission* createMission(const char* local, const char* description)
     return mission;
 }
 
+void missionPreparation(struct Mission* mission)
+{
+    cleanTerminal();
+    char choice;
+
+    printf("\n== MISSION ==\n");
+    printf("Local: %s\n", mission->local);            
+    printf("Description: %s", mission->description);
+    printf("Level: %d\n", mission->level);
+    printf("\nAre you want go to the arsenal before the mission [Y/N] or press [ESC] to go back:\n\n");
+    choice = getChoice('n', 'y');
+    if(choice == 'y'){
+        cleanTerminal();
+        arsenal();
+    }else{
+        battle();
+        printf("indo para batalha...");
+    }
+
+}
+
 void missionPanel()
 {
     cleanTerminal();
 
-    printf("+-----------------------------------------------------------------------+\n");
-    printf("|MISSION PANEL                                                          |\n");
-    printf("+-----------------------------------------------------------------------+\n\n");
+    while(1) 
+    {
+        printf("+-----------------------------------------------------------------------+\n");
+        printf("|MISSION PANEL                                                          |\n");
+        printf("+-----------------------------------------------------------------------+\n\n");
 
-    if(Panel->size == 0)
-    {
-        printf("Sorry, but we don't have any mission... 🐢\n");
-    }
-    else
-    {
+        if (Panel->size == 0) {
+            printf("Sorry, but we don't have any mission... 🐢\n");
+            printf("\nPress [ESC] to go back.\n");
+            char c;
+            do{
+                c = getch();
+            }while(c != 27);
+            back();
+            return;
+        }
+
         showMissions();
-        selectMission();
-    }
+        printf("\n\nSelect a mission to begin or press [ESC] to go back: ");
 
-    back();
+        // Loop para garantir que o usuário insere uma escolha válida
+        char choice_char = getChoice('0', '9');
+
+        if (choice_char == 27) {
+            back(); // Chama a função para voltar
+            return; // Retorna da função missionPanel
+        }
+
+        int choice_int = choice_char - '0';
+
+        if (choice_int >= 0 && choice_int < Panel->size) {
+            // A escolha é válida, então prossiga para a batalha
+            selectMission(choice_int);
+            missionPreparation(&Panel->array[choice_int]);
+            // Após a batalha e a exclusão da missão, saia do loop
+            return;
+        } else {
+            // A escolha é inválida, imprime um erro e o loop recomeça
+            printf("\nInvalid mission index! Please try again.\n");
+            sleep(1);
+            cleanTerminal();
+            missionPanel();
+        }
+    }
 
 }
 
@@ -280,21 +374,23 @@ void showMissions(){
     printHeap(Panel);
 }
 
-void selectMission(){
-    int choiceMission;
-    scanf("%d", &choiceMission);
+void selectMission(int choiceMission){
 
-    if(choiceMission < 0 || choiceMission >= Panel->size)
+    while(1)
     {
-        printf("\nInvalid mission index!\n");
-        return;
+        if(choiceMission < 0 || choiceMission >= Panel->size)
+        {
+            printf("\nInvalid mission index!\n");
+        }
+        break;
     }
     battle(Panel->array[choiceMission]);
     deleteKey(Panel, choiceMission);
 }
 
 void battle(struct Mission mission){
-    printf("in working....");
+    cleanTerminal();
+    printf("\nin working...\n\n");
 }
 
 void arsenal(){
@@ -303,6 +399,7 @@ void arsenal(){
     printf("+-----------------------------------------------------------------------+\n");
     printf("|ARSENAL AND THE ACTION PLAN                                            |\n");
     printf("+-----------------------------------------------------------------------+\n\n");
+    printf("\n[ESC] Back\n");
 
     printf("\nTurtles:\n");
     print_list(character_list);
@@ -310,12 +407,12 @@ void arsenal(){
     printf("\n\nWeapons:\n");
     print_list(weapon_list);
 
-    back();
+    printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
 }
 
 int main(){
     srand(time(NULL));
-    cleanTerminal();
+    cleanTerminal(); 
 
     createPanel();
     createList(&character_list);

@@ -12,10 +12,12 @@ void missionPanel();
 void createPanel();
 int addMissionToPanel();
 void showMissions();
-void selectMission();
+void selectMission(int choiceMission);
 void battle(struct Mission mission);
 void arsenal();
 void leave();
 void back();
+void missionPreparation(struct Mission* mission);
+char getChoice(int min_char, int max_char);
 
 #endif 

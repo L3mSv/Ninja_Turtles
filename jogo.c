@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h> //Para sleep no Linux
+//#include <unistd.h> //Para sleep no Linux
 #include <windows.h> //Para sleep no Windows
 #include <ctype.h>
 #include <conio.h> // Para getch() no Windows
@@ -119,7 +119,10 @@ void commandCentral()
 
         if(choice_modules == '1')
             missionPanel();
-        else if(choice_modules == '4')
+        else //if(choice_modules =='2')
+            //villains_database();
+        //else 
+        if(choice_modules == '4')
         {
             arsenal();
         }
@@ -141,7 +144,7 @@ void leave()
     {
         cleanTerminal();
         printf("\nExiting program...\n");
-        sleep(3);
+        Sleep(3);
         exit(0);
     }
     if(exitChoice == 'n'){
@@ -160,28 +163,28 @@ void introduction()
     ("\033[31mA cidade de Nova York esta um caos\033[0m!\n"
     " O Destruidor e Krang uniram forcas, e o Cla do Pe, junto com mutantes como Bebop" 
     "e Rocksteady, estao executando varios planos malignos ao mesmo tempo.\n"
-    "As Tartarugas Ninja estao sobrecarregadas, para organizar a defesa da cidade, Donatello" 
-    " decidiu criar um sistema de computador avancado, a \033[1m\"Central de Comando\"\033[0m,\n" 
-    "para gerenciar as missoes, catalogar os viloes e otimizar as operacoes do time.\n"
+    "As Tartarugas Ninja estao sobrecarregadas, portanto, para organizar a defesa da cidade, Donatello" 
+    " decidiu criar um sistema de computador avancado: a \033[1m\"Central de Comando\"\033[0m.\n" 
+    "Ela irá gerenciar as missoes, catalogar os viloes e otimizar as operacoes do time.\n"
     "\nSua missao e ajudar as Tartarugas Ninja a combater o mal sobre Nova York e restaurar a" 
     " paz atraves de ordens pela Central de Comando. \033[33mBoa sorte\033[0m\n" , 100);
 
-    sleep(3);
+    Sleep(3);
     cleanTerminal();
 
-    sleep(8);
+    Sleep(8);
 
     printf("\n\033[95mDonatello\033[0m: Hey, thanks god you got the Command Central and in the best time, things around here are not very good.\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: While me and my brothers were in a special mission New York was ruined, There are villians all places!\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: We are going to Sewer Liar to see if is okay.\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
     printf("\nGo to Tutorial: [Y] yes | [N] no ");
@@ -191,7 +194,7 @@ void introduction()
         tutorial();
     } else {
         printf("\n\033[95mDonatello\033[0m: So, see you later!\n");
-        sleep(3);
+        Sleep(3);
         cleanTerminal();
         commandCentral();
     }
@@ -285,7 +288,7 @@ void missionPreparation(struct Mission* mission)
         cleanTerminal();
         arsenal();
     }else{
-        battle();
+        //battle();
         printf("indo para batalha...");
     }
 
@@ -334,7 +337,7 @@ void missionPanel()
         } else {
             // A escolha é inválida, imprime um erro e o loop recomeça
             printf("\nInvalid mission index! Please try again.\n");
-            sleep(1);
+            Sleep(1);
             cleanTerminal();
             missionPanel();
         }
@@ -410,22 +413,33 @@ void arsenal(){
     printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
 }
 
+//void villains_database(){
+//    clearTerminal();
+//    
+//    printf("+-----------------------------------------------------------------------+\n");
+//    printf("|VILLAINS DATABASE                                                      |\n");
+//    printf("+-----------------------------------------------------------------------+\n\n");
+//
+//    
+//}
+
 int main(){
     srand(time(NULL));
     cleanTerminal(); 
+    introduction();
 
-    createPanel();
-    createList(&character_list);
-    createList(&weapon_list);
-
-    add_node(&character_list, "Leonardo");
-
-    numMissions = 0;
-
-    numMissions = addMissionToPanel();
-    numMissions = addMissionToPanel();
-
-    commandCentral();
+    //createPanel();
+    //createList(&character_list);
+    //createList(&weapon_list);
+//
+    //add_node(&character_list, "Leonardo");
+//
+    //numMissions = 0;
+//
+    //numMissions = addMissionToPanel();
+    //numMissions = addMissionToPanel();
+//
+    //commandCentral();
 
     return 0;
 }

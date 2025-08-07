@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "heap.h": "c"
+        "heap.h": "c",
+        "windows.h": "c",
+        "stdio.h": "c",
+        "pilha.h": "c",
+        "utils.h": "c"
     }
 }

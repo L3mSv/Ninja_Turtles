@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <string.h>
 #include <time.h>
-//#include <unistd.h> //Para sleep no Linux
+#include <unistd.h> //Para sleep no Linux
 #include <windows.h> //Para sleep no Windows
 #include <ctype.h>
 #include <conio.h> // Para getch() no Windows
@@ -119,10 +119,9 @@ void commandCentral()
 
         if(choice_modules == '1')
             missionPanel();
-        else //if(choice_modules =='2')
-            //villains_database();
-        //else 
-        if(choice_modules == '4')
+        else if(choice_modules =='2')
+            villains_database();
+        else if(choice_modules == '4')
         {
             arsenal();
         }
@@ -144,7 +143,7 @@ void leave()
     {
         cleanTerminal();
         printf("\nExiting program...\n");
-        Sleep(3);
+        sleep(3);
         exit(0);
     }
     if(exitChoice == 'n'){
@@ -169,22 +168,22 @@ void introduction()
     "\nSua missao e ajudar as Tartarugas Ninja a combater o mal sobre Nova York e restaurar a" 
     " paz atraves de ordens pela Central de Comando. \033[33mBoa sorte\033[0m\n" , 100);
 
-    Sleep(3);
+    sleep(3);
     cleanTerminal();
 
-    Sleep(8);
+    sleep(8);
 
     printf("\n\033[95mDonatello\033[0m: Hey, thanks god you got the Command Central and in the best time, things around here are not very good.\n");
 
-    Sleep(5);
+    sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: While me and my brothers were in a special mission New York was ruined, There are villians all places!\n");
 
-    Sleep(5);
+    sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: We are going to Sewer Liar to see if is okay.\n");
 
-    Sleep(5);
+    sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
     printf("\nGo to Tutorial: [Y] yes | [N] no ");
@@ -194,7 +193,7 @@ void introduction()
         tutorial();
     } else {
         printf("\n\033[95mDonatello\033[0m: So, see you later!\n");
-        Sleep(3);
+        sleep(3);
         cleanTerminal();
         commandCentral();
     }
@@ -337,7 +336,7 @@ void missionPanel()
         } else {
             // A escolha é inválida, imprime um erro e o loop recomeça
             printf("\nInvalid mission index! Please try again.\n");
-            Sleep(1);
+            sleep(1);
             cleanTerminal();
             missionPanel();
         }
@@ -413,15 +412,15 @@ void arsenal(){
     printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
 }
 
-//void villains_database(){
-//    clearTerminal();
-//    
-//    printf("+-----------------------------------------------------------------------+\n");
-//    printf("|VILLAINS DATABASE                                                      |\n");
-//    printf("+-----------------------------------------------------------------------+\n\n");
-//
-//    
-//}
+void villains_database(){
+    clearTerminal();
+    
+    printf("+-----------------------------------------------------------------------+\n");
+    printf("|VILLAINS DATABASE                                                      |\n");
+    printf("+-----------------------------------------------------------------------+\n\n");
+
+    
+}
 
 int main(){
     srand(time(NULL));

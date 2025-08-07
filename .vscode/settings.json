@@ -4,6 +4,7 @@
         "windows.h": "c",
         "stdio.h": "c",
         "pilha.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "stdlib.h": "c"
     }
 }

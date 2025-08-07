@@ -5,6 +5,10 @@
         "stdio.h": "c",
         "pilha.h": "c",
         "utils.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "string.h": "c",
+        "jogo.h": "c",
+        "character.h": "c",
+        "ctype.h": "c"
     }
 }

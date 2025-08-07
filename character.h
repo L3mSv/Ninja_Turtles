@@ -4,11 +4,10 @@
 typedef struct Character{
     const char* name;
     char* status;
-    const char* type;
     int level;
-}Character;
+}list;
 
 
 void createCharacter(const char* name, char* status, const char* type, int level);
-void verifyStatus(Character* character);
+void verifyStatus(list* character);
 #endif 

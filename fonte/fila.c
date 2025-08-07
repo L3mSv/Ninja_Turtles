@@ -1,5 +1,6 @@
  #include <stdio.h>
  #include <stdlib.h>
+ #include "../bibliotecas/fila.h"
 
  typedef struct Node{
     int data;

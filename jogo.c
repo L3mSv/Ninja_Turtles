@@ -3,21 +3,28 @@
 #include <limits.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h> //Para sleep no Linux
-#include <windows.h> //Para sleep no Windows
+//#include <unistd.h> //Para sleep no Linux
+#include <windows.h> //Para Sleep no Windows
 #include <ctype.h>
 #include <conio.h> // Para getch() no Windows
 #include "bibliotecas/pilha.h"
 #include "utils/utils.h"
 #include "bibliotecas/heap.h"
 #include "bibliotecas/lista.h"
+#include "bibliotecas/arvore.h"
 #include "character.h"
+#include "villains.h"
 #include "jogo.h"
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
+const char* VILLAINS_PATH = "villains.txt";
 
+list *characters = NULL;
+list *weapons = NULL;
+AVL* villains = NULL;
 Heap* Panel;
+//pilha-> diario de bordo
 int numMissions;
 
 
@@ -77,7 +84,7 @@ int getModuleChoice() {
     }
 }
 
-// Função para aceitar apenas numeros de 1 a 10 para escolher a missao ou esc para sair, sem ecoar na tela
+// Função para aceitar apenas numeros de 1 a 10 para escolher a missao ou esc para sair, sem ecoar na tela --cara talvez precise só aquela função de getchoice mais generica, ela ta bem boa, da pra usar pra maioria das coisas acho
 int getMission() {
     char c;
     int choice;
@@ -119,8 +126,8 @@ void commandCentral()
 
         if(choice_modules == '1')
             missionPanel();
-        else if(choice_modules =='2')
-            villains_database();
+        else if(choice_modules == '2')
+            villain_database();
         else if(choice_modules == '4')
         {
             arsenal();
@@ -143,7 +150,7 @@ void leave()
     {
         cleanTerminal();
         printf("\nExiting program...\n");
-        sleep(3);
+        Sleep(3);
         exit(0);
     }
     if(exitChoice == 'n'){
@@ -168,22 +175,22 @@ void introduction()
     "\nSua missao e ajudar as Tartarugas Ninja a combater o mal sobre Nova York e restaurar a" 
     " paz atraves de ordens pela Central de Comando. \033[33mBoa sorte\033[0m\n" , 100);
 
-    sleep(3);
+    Sleep(3);
     cleanTerminal();
 
-    sleep(8);
+    Sleep(8);
 
     printf("\n\033[95mDonatello\033[0m: Hey, thanks god you got the Command Central and in the best time, things around here are not very good.\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: While me and my brothers were in a special mission New York was ruined, There are villians all places!\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: We are going to Sewer Liar to see if is okay.\n");
 
-    sleep(5);
+    Sleep(5);
 
     printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
     printf("\nGo to Tutorial: [Y] yes | [N] no ");
@@ -193,7 +200,7 @@ void introduction()
         tutorial();
     } else {
         printf("\n\033[95mDonatello\033[0m: So, see you later!\n");
-        sleep(3);
+        Sleep(3);
         cleanTerminal();
         commandCentral();
     }
@@ -336,7 +343,7 @@ void missionPanel()
         } else {
             // A escolha é inválida, imprime um erro e o loop recomeça
             printf("\nInvalid mission index! Please try again.\n");
-            sleep(1);
+            Sleep(1);
             cleanTerminal();
             missionPanel();
         }
@@ -412,33 +419,43 @@ void arsenal(){
     printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
 }
 
-void villains_database(){
-    clearTerminal();
+void villain_database(){
     
+    cleanTerminal();
+        
     printf("+-----------------------------------------------------------------------+\n");
     printf("|VILLAINS DATABASE                                                      |\n");
     printf("+-----------------------------------------------------------------------+\n\n");
+    printf("\n[ESC] Back\n");
 
-    
+    printf("\n\033[95mDonatello\033[0m: This is our villains archive!! Here you can search for a specific villain."); 
+    printf("\nAnd of course, you can add new ones if needed!!\n");
+    printf("[1] - Search for a villain.\n");
+    printf("[2] - Add new villain.\n");
+
+    char choice_module = getChoice('1', '2');
+
+    if(choice_module == '1'){
+        cleanTerminal();
+        search_villain();
+        
+    }else if(choice_module == '2'){
+        cleanTerminal();
+        add_villain();
+    }
+   
+    back();
 }
 
 int main(){
+    
     srand(time(NULL));
+    get_villains_from_file(&villains);
     cleanTerminal(); 
-    introduction();
+    //introduction();
 
-    //createPanel();
-    //createList(&character_list);
-    //createList(&weapon_list);
-//
-    //add_node(&character_list, "Leonardo");
-//
-    //numMissions = 0;
-//
-    //numMissions = addMissionToPanel();
-    //numMissions = addMissionToPanel();
-//
-    //commandCentral();
+    commandCentral();
+    
 
     return 0;
 }

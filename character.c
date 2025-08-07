@@ -5,18 +5,17 @@
 #include "character.h"
 #include "bibliotecas/lista.h"
 
-void createCharacter(const char* name, char* status, const char* type, int level)
+void createCharacter(const char* name, char* status, int level)
 {   
-    Character* newCharacter = (Character*) malloc(sizeof(Character));
+    list* newCharacter = (list*) malloc(sizeof(list));
     newCharacter->name = name;
     newCharacter->status = status;
-    newCharacter->type = type;
     newCharacter->level = level;
 
     add_node(&character_list, newCharacter->name);
 }
 
-void verifyStatus(Character* character){
+void verifyStatus(list* character){
     if (character == NULL || character->status == NULL) {
         printf("Erro: nothing character.\n");
         return;
@@ -25,7 +24,6 @@ void verifyStatus(Character* character){
     char lowerStatus[50];
     char lowerType[50];
     strcpy(lowerStatus, character->status); 
-    strcpy(lowerType, character->type);
 
     for (int i = 0; lowerStatus[i]; ++i) 
         lowerStatus[i] = tolower(lowerStatus[i]);

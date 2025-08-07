@@ -1,19 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../bibliotecas/arvore.h"
 #undef max
 
 /*
 A arvore servira para armazenar os viloes, ranqueando-os por nivel
 to fazendo ainda, n passei tudo
 */
-typedef struct node{
-    char* name;
-    int level, height;
-    struct node *left, *right;
-} AVL;
 
-int height(AVL *node){// isso é pra altura de um no, -1 se nulo
+int height(AVL *node){// isso é pra altura de um nodo, -1 se nulo
     if(!node) return -1;
 
     return node->height;
@@ -67,7 +63,7 @@ AVL* balancing(AVL* node) {
     return node; // já balanceado
 }
 
-AVL* create_node(char *name, int level){
+AVL* create_node(char *name, int level, char* wkp){
     AVL *newnode = (AVL*)malloc(sizeof(AVL));
     if(!newnode){
         printf("Error Alocating memory for tree's node.\n");
@@ -79,6 +75,12 @@ AVL* create_node(char *name, int level){
         return NULL;
     }
     strcpy(newnode->name, name);
+    newnode->wkp = (char*)malloc(strlen(wkp) + 1);
+    if(!newnode->wkp){
+        printf("Error alocating memory for weak point.\n");
+        return NULL;
+    }
+    strcpy(newnode->wkp, wkp);
     newnode->level = level;
     newnode->right = newnode->left = NULL;
     newnode->height = 0;
@@ -86,16 +88,16 @@ AVL* create_node(char *name, int level){
     return newnode;
 }
 
-AVL* insert_node(AVL *root, char *name, int level){
+AVL* insert_node(AVL *root, char *name, int level, char *wkp){
     if(!root){
-        return create_node(name, level);
+        return create_node(name, level, wkp);
     }
 
     if(strcmp(root->name, name) > 0){
-        root->left = insert_node(root->left, name, level);
+        root->left = insert_node(root->left, name, level, wkp);
     }else 
     if(strcmp(root->name, name) < 0){
-        root->right = insert_node(root->right, name, level);
+        root->right = insert_node(root->right, name, level, wkp);
     }else{
         return root;
     }
@@ -104,3 +106,20 @@ AVL* insert_node(AVL *root, char *name, int level){
 
     return root;
 }
+
+AVL* search(AVL* root, char name[]){
+    if(!root){
+        return NULL;
+    }
+
+    if(strcmp(root->name, name) == 0){
+        return root;
+    }
+    else if(strcmp(root->name, name) > 0){
+        return search(root->left, name);
+    }
+    else{
+        return search(root->right, name);
+    }
+}
+

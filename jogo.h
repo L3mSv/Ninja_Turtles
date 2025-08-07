@@ -19,5 +19,6 @@ void leave();
 void back();
 void missionPreparation(struct Mission* mission);
 char getChoice(int min_char, int max_char);
+void villain_database();
 
 #endif 

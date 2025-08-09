@@ -34,8 +34,13 @@ char getChoice_for_team_func(int min_char, int max_char) //a mesma função de g
 void change_team(){
     cleanTerminal(); 
 
+    printf("ESC to go back\n\n");
+
     printf("Characters available: \n");
     print_list_character(character_list);
+    
+    printf("\nWeapons available:\n");
+    print_list_weapon(weapon_list);
 
     printf("\nYour team: \n");
     print_list_team(team);
@@ -60,17 +65,22 @@ void change_character_team(){
     int team_member_code, character_code;
 
     cleanTerminal();
-    printf("ESC to go back\n");
+    printf("\n\n");
     print_list_character(character_list);
+    printf("\n");
     print_list_team(team);
 
     printf("\nWhich one do you want to swap?\n");
     printf("\nTeam's member code: ");
-        scanf(" %c", &team_member_code);
-        if(team_member_code_buffer == 27){
-            change_team();
-        }else{
-            team_member_code = team_member_code_buffer - '0'; //converte o char para int
+        scanf(" %c", &team_member_code_buffer);
+        team_member_code = team_member_code_buffer - '0'; //converte o char para int
+        if(team_member_code > 4){
+            printf("Invalid index for team!!\n");
+            printf("Press any key to proceed.");
+            char c = getch();
+            c++;//só fazendo uma operação qualquer para não dar "variavel não utilizada"
+
+            change_character_team();
         }
     printf("\nCharacter's code: ");
         scanf(" %d", &character_code);
@@ -83,7 +93,7 @@ void swap_characters(Team **team_head, Character **char_head, int team_index, in
     Character *temp_char = *char_head;
     Team *temp_team = *team_head;
 
-    for(int i = 0; i < team_index; i++){
+    for(int i = 0; i < team_index - 1; i++){
         if(!temp_team->next){
             printf("Invalid index for team!!\n");
             printf("Press any key to proceed.");
@@ -95,7 +105,7 @@ void swap_characters(Team **team_head, Character **char_head, int team_index, in
             temp_team = temp_team->next;
         }
     }
-    for(int i = 0; i < character_index; i++){
+    for(int i = 0; i < character_index - 1; i++){
         if(!temp_char->next){
             printf("Invalid index for character!!\n");
             printf("Press any key to proceed.");
@@ -127,18 +137,16 @@ void change_weapon(){
     int team_member_code, weapon_code;
 
     cleanTerminal();
-    printf("\nESC to go back\n");
+    printf("\nESC to go back\n\n");
     print_list_weapon(weapon_list);
+    printf("\n");
     print_list_team(team);
 
     printf("\nWhich one do you want to swap?\n");
     printf("\nTeam's member code: ");
-        scanf(" %c", &team_member_code);
-        if(team_member_code_buffer == 27){
-            change_team();
-        }else{
-            team_member_code = team_member_code_buffer - '0'; //converte o char para int
-        }
+        scanf(" %c", &team_member_code_buffer);
+                team_member_code = team_member_code_buffer - '0'; //converte o char para int
+        
     printf("\nWeapons's code: ");
         scanf(" %d", &weapon_code);
 
@@ -146,11 +154,12 @@ void change_weapon(){
         
 }
 
+
 void swap_weapon(Team **team_head, Weapon **weapon_head, int team_index, int weapon_index){
     Weapon *temp_weapon = *weapon_head;
     Team *temp_team = *team_head;
 
-    for(int i = 0; i < team_index; i++){
+    for(int i = 0; i < team_index - 1; i++){
         if(!temp_team->next){
             printf("Invalid index for team!!\n");
             printf("Press any key to proceed.");
@@ -162,7 +171,7 @@ void swap_weapon(Team **team_head, Weapon **weapon_head, int team_index, int wea
             temp_team = temp_team->next;
         }
     }
-    for(int i = 0; i < weapon_index; i++){
+    for(int j = 0; j < weapon_index - 1; j++){
         if(!temp_weapon->next){
             printf("Invalid index for weapon!!\n");
             printf("Press any key to proceed.");

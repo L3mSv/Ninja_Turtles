@@ -15,7 +15,7 @@ void createWeapon(const char* name)
     add_node(&weapon_list, newWeapon->name); 
 }*/
 
-void getting_weapon_from_file(){
+void getting_weapon_from_file(Weapon **head){
     FILE *file1 = fopen("weapon.txt", "r");
         if(!file1){
             perror("fopen");
@@ -26,7 +26,7 @@ void getting_weapon_from_file(){
 
     while(fgets(name_buffer, 100, file1)){
         name_buffer[strcspn(name_buffer, "\n")] = '\0';
-        add_node_weapon(&weapon_list, name_buffer);
+        add_node_weapon(head, name_buffer);
     }
     
     return;

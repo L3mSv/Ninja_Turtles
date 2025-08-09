@@ -11,5 +11,5 @@
 
 //void createCharacter(const char* name, char* status, int level);
 void verifyStatus(Character* character);
-void getting_characters_from_file();
+void getting_characters_from_file(Character **head);
 #endif 

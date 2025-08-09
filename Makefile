@@ -2,10 +2,10 @@ CC = gcc
 CFLAGS = -Wall -g
 LIBS = -lm
 
-all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o
-	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o $(LIBS)
+all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o
+	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o team.o $(LIBS)
 
-jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h
+jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h team.h
 	$(CC) $(CFLAGS) -c jogo.c
 
 pilha.o: fonte/pilha.c bibliotecas/pilha.h
@@ -31,6 +31,9 @@ weapon.o: weapon.c weapon.h bibliotecas/lista.h
 
 villains.o: villains.c villains.h bibliotecas/arvore.h utils/utils.h
 	$(CC) $(CFLAGS) -c villains.c
+
+team.o: team.c team.h bibliotecas/lista.h jogo.h
+	$(CC) $(CFLAGS) -c team.c
 
 clean:
 	-del /Q *.o *.exe *~ all

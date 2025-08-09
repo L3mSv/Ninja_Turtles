@@ -39,7 +39,7 @@ void verifyStatus(Character* character){
     }
 }
 
-void getting_characters_from_file(){
+void getting_characters_from_file(Character **head){
     FILE *file1 = fopen("character.txt", "r");
         if(!file1){
             perror("fopen");
@@ -50,7 +50,7 @@ void getting_characters_from_file(){
     int level_buffer;
 
     while(fscanf(file1, "\n%99[^,], %99[^,], %d", name_buffer, status_buffer, &level_buffer) == 3){
-        add_node_character(&character_list, name_buffer, status_buffer, level_buffer);
+        add_node_character(head, name_buffer, status_buffer, level_buffer);
     }
     
     return;

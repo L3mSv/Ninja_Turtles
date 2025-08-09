@@ -16,11 +16,13 @@
 #include "weapon.h"
 #include "villains.h"
 #include "jogo.h"
+#include "team.h"
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
 const char* VILLAINS_PATH = "villains.txt";
 
+Team *team = NULL;
 Character *character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
@@ -411,16 +413,25 @@ void arsenal(){
     printf("+-----------------------------------------------------------------------+\n\n");
     printf("\n[ESC] Back\n");
 
-    printf("\nTurtles:\n");
+    printf("\n~Turtles~:\n");
     print_list_character(character_list);
 
-    printf("\n\nWeapons:\n");
+    printf("\n");
     print_list_weapon(weapon_list);
 
-    printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
+    printf("\nYour team:\n");
+    printf("--------------------\n");
+    print_list_team(team);
+    printf("--------------------\n");
 
+    printf("\nWould you like to organize your team? [Y/N] ");
+    char choice = getChoice('n','y');
     
-    
+    if(choice == 'y'){
+        change_team();
+    }else{
+        commandCentral();
+    }
 }
 
 void villain_database(){
@@ -456,7 +467,9 @@ void villain_database(){
 int main(){
     
     srand(time(NULL));
-    getting_characters_from_file();
+    initialize_team();
+    getting_weapon_from_file(&weapon_list);
+    getting_characters_from_file(&character_list);
     get_villains_from_file(&villains);
     cleanTerminal(); 
     //introduction();

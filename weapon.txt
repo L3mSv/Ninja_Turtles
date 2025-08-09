@@ -1,1 +1,6 @@
-katana
+Katana
+Nunchaku
+Sai
+Staff
+Dagger
+Spoon

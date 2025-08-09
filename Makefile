@@ -5,7 +5,7 @@ LIBS = -lm
 all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o
 	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o $(LIBS)
 
-jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h villains.h
+jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h
 	$(CC) $(CFLAGS) -c jogo.c
 
 pilha.o: fonte/pilha.c bibliotecas/pilha.h
@@ -29,7 +29,7 @@ character.o: character.c character.h bibliotecas/lista.h
 weapon.o: weapon.c weapon.h bibliotecas/lista.h
 	$(CC) $(CFLAGS) -c weapon.c 
 
-villains.o: villains.c villains.h bibliotecas/arvore.h
+villains.o: villains.c villains.h bibliotecas/arvore.h utils/utils.h
 	$(CC) $(CFLAGS) -c villains.c
 
 clean:

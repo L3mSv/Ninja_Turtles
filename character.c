@@ -5,18 +5,20 @@
 #include "character.h"
 #include "bibliotecas/lista.h"
 
+extern Character *character_list;
+/*
 void createCharacter(const char* name, char* status, int level)
 {   
-    list* newCharacter = (list*) malloc(sizeof(list));
+    Character* newCharacter = (Character*) malloc(sizeof(Character));
     newCharacter->name = name;
     newCharacter->status = status;
     newCharacter->level = level;
 
     add_node(&character_list, newCharacter->name);
-}
+}*/
 
-void verifyStatus(list* character){
-    if (character == NULL || character->status == NULL) {
+void verifyStatus(Character* character){
+    if (character == NULL || character->status == NULL){
         printf("Erro: nothing character.\n");
         return;
     }
@@ -36,3 +38,21 @@ void verifyStatus(list* character){
         printf("%s - ", character->name);
     }
 }
+
+void getting_characters_from_file(){
+    FILE *file1 = fopen("character.txt", "r");
+        if(!file1){
+            perror("fopen");
+            return;
+        }
+    
+    char name_buffer[100], status_buffer[100];
+    int level_buffer;
+
+    while(fscanf(file1, "\n%99[^,], %99[^,], %d", name_buffer, status_buffer, &level_buffer) == 3){
+        add_node_character(&character_list, name_buffer, status_buffer, level_buffer);
+    }
+    
+    return;
+}
+

@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <conio.h>
 #include "villains.h"
+#include "utils/utils.h"
 #include "bibliotecas/arvore.h"
 
 extern AVL* villains;
@@ -13,7 +15,7 @@ void get_villains_from_file(AVL **root){
             perror("fopen");
             return;
         }
-    
+     
     char name_buffer[100], wkp_buffer[100];
     int level_buffer;
 
@@ -28,18 +30,25 @@ void get_villains_from_file(AVL **root){
 }
 
 void add_villain(){
-    char villain_name_buffer[50], weak_point_buffer[100];
+    char villain_name_buffer[50], weak_point_buffer[100], level_buffer[10];;
     int level;
-    
 
-    printf("Name of the villain: ");
+    printf("---------------------------\n");
+    printf("Add the new villain:\n");
+    printf("---------------------------\n");
+    printf("-Name of the villain: ");
         fgets(villain_name_buffer, 50, stdin);
         villain_name_buffer[strcspn(villain_name_buffer, "\n")] = '\0';
-    printf("Threat level: ");
-        scanf(" %d", &level);
-    printf("Villain's weak point: ");
+    printf("-Threat level: ");
+        fgets(level_buffer, 10, stdin); // tive de usar o fgets, o scanf tava dando problema com o "\n" na hora de ler a fraqueza do vilão
+        sscanf(level_buffer, "%d", &level); //o sscanf é pra ler dados de uma string, no caso o "level_buffer" que vai ter o numero e o "\n"
+
+    printf("-Villain's weak point: ");
         fgets(weak_point_buffer, 100, stdin);
         weak_point_buffer[strcspn(weak_point_buffer, "\n")] = '\0';
+
+    printf("Adding your villain ");
+    print_lento(". . . ", 500);
 
     villains = insert_node(villains, villain_name_buffer, level, weak_point_buffer);
 
@@ -62,8 +71,10 @@ void search_villain(){
     
     if(!temp){
         printf("Villain not found.\n");
-
-        Sleep(5000);
+        printf("Press any key to proceed.\n");
+        char c = getch();
+        c++; //coloquei essa operação aqui só pro programa compilar, ele tava dizendo que c não estava sendo usado.
+        
         return;
     }else{
         printf("Villain found!\n");
@@ -71,7 +82,10 @@ void search_villain(){
         printf("Threat level: %d\n", temp->level);
         printf("Weakness: %s\n", temp->wkp);
 
-        Sleep(5000);
+        printf("Press any key to proceed.\n");
+        char c = getch();
+        c++;//coloquei essa operação aqui só pro programa compilar, ele tava dizendo que c não estava sendo usado.
+
         return;
     }
 }

@@ -1,13 +1,15 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-typedef struct Character{
-    const char* name;
-    char* status;
-    int level;
-}list;
+#include "bibliotecas/lista.h"
+//typedef struct Character{
+//    const char* name;
+//    char* status;
+//    int level;
+//}Character;
 
 
-void createCharacter(const char* name, char* status, const char* type, int level);
-void verifyStatus(list* character);
+//void createCharacter(const char* name, char* status, int level);
+void verifyStatus(Character* character);
+void getting_characters_from_file();
 #endif 

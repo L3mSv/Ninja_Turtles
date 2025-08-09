@@ -9,6 +9,9 @@
         "string.h": "c",
         "jogo.h": "c",
         "character.h": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "lista.h": "c",
+        "weapon.h": "c",
+        "arvore.h": "c"
     }
 }

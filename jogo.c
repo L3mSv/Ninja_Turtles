@@ -13,6 +13,7 @@
 #include "bibliotecas/lista.h"
 #include "bibliotecas/arvore.h"
 #include "character.h"
+#include "weapon.h"
 #include "villains.h"
 #include "jogo.h"
 
@@ -20,8 +21,8 @@ const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
 const char* VILLAINS_PATH = "villains.txt";
 
-list *characters = NULL;
-list *weapons = NULL;
+Character *character_list = NULL;
+Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
 //pilha-> diario de bordo
@@ -411,12 +412,15 @@ void arsenal(){
     printf("\n[ESC] Back\n");
 
     printf("\nTurtles:\n");
-    print_list(character_list);
+    print_list_character(character_list);
 
     printf("\n\nWeapons:\n");
-    print_list(weapon_list);
+    print_list_weapon(weapon_list);
 
     printf("You want organize your team [Y/N]: %c", getChoice('y','n'));
+
+    
+    
 }
 
 void villain_database(){
@@ -430,7 +434,8 @@ void villain_database(){
 
     printf("\n\033[95mDonatello\033[0m: This is our villains archive!! Here you can search for a specific villain."); 
     printf("\nAnd of course, you can add new ones if needed!!\n");
-    printf("[1] - Search for a villain.\n");
+
+    printf("\n[1] - Search for a villain.\n");
     printf("[2] - Add new villain.\n");
 
     char choice_module = getChoice('1', '2');
@@ -438,10 +443,11 @@ void villain_database(){
     if(choice_module == '1'){
         cleanTerminal();
         search_villain();
-        
+        villain_database();        
     }else if(choice_module == '2'){
         cleanTerminal();
         add_villain();
+        villain_database();
     }
    
     back();
@@ -450,6 +456,7 @@ void villain_database(){
 int main(){
     
     srand(time(NULL));
+    getting_characters_from_file();
     get_villains_from_file(&villains);
     cleanTerminal(); 
     //introduction();

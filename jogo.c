@@ -154,6 +154,10 @@ void leave()
         cleanTerminal();
         printf("\nExiting program...\n");
         Sleep(3);
+
+        free_list_character(&character_list);
+        free_list_team(&team);
+        free_list_weapon(&weapon_list);
         exit(0);
     }
     if(exitChoice == 'n'){
@@ -475,6 +479,8 @@ int main(){
     //introduction();
 
     commandCentral();
+    
+
     
 
     return 0;

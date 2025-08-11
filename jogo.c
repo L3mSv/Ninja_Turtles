@@ -17,6 +17,7 @@
 #include "villains.h"
 #include "jogo.h"
 #include "team.h"
+#include "battle.h"
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
@@ -301,8 +302,15 @@ void missionPreparation(struct Mission* mission)
         cleanTerminal();
         arsenal();
     }else{
-        //battle();
-        printf("indo para batalha...");
+        cleanTerminal();
+        printf("\nResult Battle: %.2f\n", battleResolution(team, mission));
+
+        char c = getch();
+        while(c != 27);
+
+        addMissionToPanel();
+        addMissionToPanel();
+        commandCentral();
     }
 
 }
@@ -400,13 +408,8 @@ void selectMission(int choiceMission){
         }
         break;
     }
-    battle(Panel->array[choiceMission]);
+    missionPreparation(&Panel->array[choiceMission]);
     deleteKey(Panel, choiceMission);
-}
-
-void battle(struct Mission mission){
-    cleanTerminal();
-    printf("\nin working...\n\n");
 }
 
 void arsenal(){
@@ -475,6 +478,10 @@ int main(){
     getting_weapon_from_file(&weapon_list);
     getting_characters_from_file(&character_list);
     get_villains_from_file(&villains);
+
+    Panel = createHeap(10);
+    addMissionToPanel();
+
     cleanTerminal(); 
     //introduction();
 

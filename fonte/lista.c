@@ -168,7 +168,6 @@ int find_character_index_by_name(Character *head, const char *name) {
         printf("Error, head is NULL\n");
         return;
     }
-    printf("Weapons:\n");
 
     int i = 1;
     while(head){

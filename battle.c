@@ -63,7 +63,11 @@ void battleResolution(Team* team, struct Mission* mission){
     }
     else if(result <= 3 && result >= 0){
         team->level += 0.2;
-        //team->
+        Character* member = randomMember(team);
+        member->status = "injured";
+        remove_character_by_name(character_list, member->name);
+        remove_from_team(team, member->name);
+        add_node_character(&injured_character_list, member->name, member->status, member->level);
         printf("GOOD!\n");
     }
     else{
@@ -77,6 +81,33 @@ void battleResolution(Team* team, struct Mission* mission){
     }while(c != 27);
     back();
 
+}
+
+Character* randomMember(Team* team){
+    if(team == NULL)
+    {
+        printf("\nThe list is void!\n");
+        return NULL;
+    }
+
+    int count = 0;
+    Character* temp = team;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+
+    srand(time(NULL));
+    int random_index = rand() % count;
+
+    temp = team->next;
+    for(int i = 0; i < random_index; ++i)
+    {
+        temp = temp->next;
+    }
+
+    return temp;
 }
 
 /*

@@ -17,6 +17,7 @@ const char* VILLAINS_PATH = "villains.txt";
 Pilha* logbook = NULL;
 Team *team = NULL;
 Character *character_list = NULL;
+Character *injured_character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
@@ -436,7 +437,8 @@ void arsenal(){
     }
 
     printf("\n=== Nursing ===\n");
-    
+    print_list_character(injured_character_list);
+
     
 }
 

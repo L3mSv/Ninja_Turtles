@@ -19,6 +19,7 @@ extern const char* VILLAINS_PATH;
 extern Pilha* logbook;
 extern Team *team;
 extern Character *character_list;
+extern Character *injured_character_list;
 extern Weapon *weapon_list;
 extern AVL* villains;
 extern Heap* Panel;

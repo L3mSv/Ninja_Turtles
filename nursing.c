@@ -3,12 +3,50 @@
 #include <string.h>
 #include "nursing.h"
 
-void addInjuredMember(Team* team, float resultBattle)
+extern Character *injured_character_list;
+
+void injured_list_inicialization(Character *characters_to_count){
+    int i = 0;
+    while(characters_to_count->next){
+        characters_to_count = characters_to_count->next;
+        i++;
+    }
+
+    for(int j = 0; j < i; j++){
+        add_node_character(&injured_character_list, "Empty", "null", 0.0);
+    }
+
+    return;
+}
+
+void addInjuredMember(Team** team, Character **injured_ones, float resultBattle)
 {
     Team* member = randomMember(team);
     member->status = strdup("injured");
+
+    Team *temp = *team;
+    int count = 0;
+    while(temp->next){ //conta quantos membros válidos há no time
+        if(strcmp(temp->name, "Empty") != 0){
+            count++;
+        }
+        temp = temp->next;
+    }
+
+    srand(time(NULL));
+    int index_to_be_removed = rand() % count; //gera um numero aleatorio para ficar ferido
+
+    temp = *team; // reseto o "temp" para pegar os dados do personagem no indice gerado
+    int i = 1;
+    while(temp->next != NULL && i < index_to_be_removed){
+        temp = temp->next;
+    }
+
+
+    add_node_character(injured_ones, temp->name, temp->status, temp->level);
+    
     remove_from_team(&team, member->name);
-    add_to_team(&injured_character_list, member->name, member->status, NULL, member->level);
+    
     setConsequenceInjured(member, resultBattle);
 
 }

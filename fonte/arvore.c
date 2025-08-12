@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "../bibliotecas/arvore.h"
 #undef max
 
@@ -134,41 +135,43 @@ AVL* minValueNode(AVL* node){
 
 AVL* remove_AVL_node(AVL *root, char* name){
 
+    if(!root){
+        printf("\nVillain not found.\n");
+        getch();
+        return root;
+    }
+
     if(strcmp(name, root->name) < 0){
         root->left = remove_AVL_node(root->left, name);
     }else if(strcmp(name, root->name) > 0){
         root->right = remove_AVL_node(root->right, name);
     }else{ 
-        //nodo encontrado
-        if(root->left == NULL || root->right == NULL){
-            AVL* temp = NULL;
-            if(root->left){
-                temp = root->left;
-            }else{
-                temp = root->right;
-            }
+        if (!root->left && !root->right) { //o vilão é uma "folha" sem filhos
+            free(root->name);
+            free(root->wkp);
+            free(root);
 
-            if(!temp){ //sem fulhos
-                temp = root;
-                root = NULL;
-            }else{ // um filho
-                *root = *temp;
-            }
-            free(temp);
-        } else{
+            return NULL;
+        }else if(!root->left || !root->right){
+            AVL* temp = root->left ? root->left : root->right;
+            free(root->name);
+            free(root->wkp);
+            free(root);
+            return temp;
+        }else{
             AVL* temp = minValueNode(root->right);
             strcpy(root->name, temp->name);
             root->right = remove_AVL_node(root->right, temp->name);
+
         }
     }
-    
     
     if(!root){
         return root;
     }
-    
     update_height(root);
-    balancing(root);
+
+    root = balancing(root);
 
     return root;
 }

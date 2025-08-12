@@ -180,6 +180,12 @@ void swap_weapon(Team **team_head, Weapon **weapon_head, int team_index, int wea
             temp_team = temp_team->next;
         }
     }
+    if(strcmp(temp_team->name, "Empty") == 0){
+        printf("\nYou cannot give a weapon to a person that doesnt exist!!\n");
+        getch();
+        change_team();
+    }
+
     for(int j = 0; j < weapon_index - 1; j++){
         if(!temp_weapon->next){
             printf("Invalid index for weapon!!\n");
@@ -236,3 +242,4 @@ void check_team(Team *head, struct Mission* mission, int index){
 
     return;
 }
+

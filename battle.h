@@ -5,7 +5,7 @@
     #include "team.h"
     #include "weapon.h"
 
-    float teamForce(Team* team);
+    float teamForceCalculation(Team* team);
     void battleResolution(Team* team, struct Mission* mission);
 
 #endif 

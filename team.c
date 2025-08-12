@@ -209,3 +209,30 @@ void initialize_team(){
     add_to_team(&team, "Empty", "null", "null", 0);
     add_to_team(&team, "Empty", "null", "null", 0);
 }
+
+void check_team(Team *head, struct Mission* mission, int index){
+    int count_members = 0, count_weapons = 0;
+    while(head){
+        if(strcmp(head->name, "Empty") == 0){
+            count_members++;
+        }
+        if(strcmp(head->weapon, "null") == 0){
+            count_weapons++;
+        }
+        head = head->next;
+    }
+    if(count_members > 2){
+        printf("You cannot have less than 2 members per mission!!");
+        printf("Press any key to proceed.\n");
+        getch();
+        missionPreparation(mission, index);
+    }
+    if(count_weapons < 2){
+        printf("You cannot have more than 2 members equipping weapons!!!\n");
+        printf("Press any key to proceed.\n");
+        getch();
+        missionPreparation(mission, index);
+    }
+
+    return;
+}

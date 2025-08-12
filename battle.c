@@ -11,31 +11,35 @@
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;
+    FILE *file1 = fopen("bench", "w");
     int numMembers = 0;
-    while(team->next != NULL)
+    while(team != NULL)
     {
-        if(strcmp("Katana", team->weapon) && strcmp("Leonardo", team->name))
+        if(!(strcmp("Katana", team->weapon) && strcmp("Leonardo", team->name)))
         {
             totalForce += 0.5;     
         }
-        if(strcmp("Sai", team->weapon) && strcmp("Rafael", team->name))
+        if(!(strcmp("Sai", team->weapon) && strcmp("Rafael", team->name)))
         {
             totalForce += 0.5;         
         }
-        if(strcmp("Staff", team->weapon) && strcmp("Donatello", team->name))
+        if(!(strcmp("Staff", team->weapon) && strcmp("Donatello", team->name)))
         {
             totalForce += 0.5;        
         }
-        if(strcmp("Nunchaku", team->weapon) && strcmp("Michelangelo", team->name))
+        if(!(strcmp("Nunchaku", team->weapon) && strcmp("Michelangelo", team->name)))
         {
             totalForce += 0.5;       
         }
         totalForce += team->level;
-        numMembers++;
-
+        fprintf(file1, "totalForce : %f\n", totalForce);
+        if(strcmp("Empty", team->name) != 0){
+            numMembers++;
+        }
+       
         team = team->next;
     }
-
+    fclose(file1);
     return totalForce/numMembers;
 }
 

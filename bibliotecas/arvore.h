@@ -18,6 +18,7 @@ AVL* balancing(AVL* node);
 AVL* create_node(char *name, int level, char* wkp);
 AVL* insert_node(AVL *root, char *name, int level, char* wkp);
 AVL* search(AVL* root, char name[]);
+AVL* remove_AVL_node(AVL *root, char* name);
 
 
 #endif

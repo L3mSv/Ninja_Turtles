@@ -7,6 +7,6 @@
 
 void addInjuredMember(Team* team);
 void addInjuredTeam(Team* team);
-void removeInjuredMember();
+void removeInjuredMember(Character* injured_character_list);
 
 #endif

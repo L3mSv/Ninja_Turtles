@@ -458,8 +458,9 @@ void villain_database(){
 
     printf("\n[1] - Search for a villain.\n");
     printf("[2] - Add new villain.\n");
+    printf("[3] - Remove a villain.\n");
 
-    char choice_module = getChoice('1', '2');
+    char choice_module = getChoice('1', '3');
 
     if(choice_module == '1'){
         cleanTerminal();
@@ -468,6 +469,10 @@ void villain_database(){
     }else if(choice_module == '2'){
         cleanTerminal();
         add_villain();
+        villain_database();
+    }else if(choice_module == '3'){
+        cleanTerminal();
+        remove_villain();
         villain_database();
     }
    

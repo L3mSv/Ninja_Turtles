@@ -8,6 +8,8 @@
 #include "bibliotecas/pilha.h"
 #include "utils/utils.h"
 #include "jogo.h"
+#include "nursing.h"
+
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;
@@ -84,7 +86,7 @@ void battleResolution(Team* team, struct Mission* mission){
 
 }
 
-Character* randomMember(Team* team){
+Team* randomMember(Team* team){
     if(team == NULL)
     {
         printf("\nThe list is void!\n");
@@ -92,7 +94,7 @@ Character* randomMember(Team* team){
     }
 
     int count = 0;
-    Character* temp = team;
+    Team* temp = team;
     while(temp != NULL)
     {
         count++;

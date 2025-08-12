@@ -89,3 +89,21 @@ void search_villain(){
         return;
     }
 }
+
+void remove_villain(){
+    char villain_name_buffer[50];
+
+    printf("---------------------------\n");
+    printf("Removing a villain:\n");
+    printf("---------------------------\n");
+    printf("-Name of the villain: ");
+        fgets(villain_name_buffer, 50, stdin);
+        villain_name_buffer[strcspn(villain_name_buffer, "\n")] = '\0';
+
+    printf("Removing your villain ");
+    print_lento(". . . ", 500);
+
+    villains = remove_AVL_node(villains, villain_name_buffer);
+
+    return;
+}

@@ -15,6 +15,8 @@
         "arvore.h": "c",
         "conio.h": "c",
         "villains.h": "c",
-        "team.h": "c"
+        "team.h": "c",
+        "nursing.h": "c",
+        "battle.h": "c"
     }
 }

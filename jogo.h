@@ -11,6 +11,7 @@
 #include "utils/utils.h"
 #include "bibliotecas/lista.h"
 #include "battle.h"
+#include "nursing.h"
 
 extern const char* DESCRIPTIONS_PATH;
 extern const char* LOCALS_PATH;

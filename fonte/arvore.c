@@ -123,3 +123,52 @@ AVL* search(AVL* root, char name[]){
     }
 }
 
+AVL* minValueNode(AVL* node){
+    AVL* temp = node;
+
+    while(temp->left){
+        temp = temp->left;
+    }
+    return temp;
+}
+
+AVL* remove_AVL_node(AVL *root, char* name){
+
+    if(strcmp(name, root->name) < 0){
+        root->left = remove_AVL_node(root->left, name);
+    }else if(strcmp(name, root->name) > 0){
+        root->right = remove_AVL_node(root->right, name);
+    }else{ 
+        //nodo encontrado
+        if(root->left == NULL || root->right == NULL){
+            AVL* temp = NULL;
+            if(root->left){
+                temp = root->left;
+            }else{
+                temp = root->right;
+            }
+
+            if(!temp){ //sem fulhos
+                temp = root;
+                root = NULL;
+            }else{ // um filho
+                *root = *temp;
+            }
+            free(temp);
+        } else{
+            AVL* temp = minValueNode(root->right);
+            strcpy(root->name, temp->name);
+            root->right = remove_AVL_node(root->right, temp->name);
+        }
+    }
+    
+    
+    if(!root){
+        return root;
+    }
+    
+    update_height(root);
+    balancing(root);
+
+    return root;
+}

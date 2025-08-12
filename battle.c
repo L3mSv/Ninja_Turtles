@@ -5,6 +5,14 @@
 #include <windows.h> 
 #include <time.h>
 #include "battle.h"
+<<<<<<< HEAD
+=======
+#include "bibliotecas/pilha.h"
+#include "utils/utils.h"
+#include "jogo.h"
+#include "nursing.h"
+
+>>>>>>> b1aadc87abecf174f834cb73a643e4ceae542319
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;

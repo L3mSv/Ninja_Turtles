@@ -3,7 +3,11 @@ CFLAGS = -Wall -g -I. -Ibibliotecas -Ifontes -Iutils
 LIBS = -lm
 
 all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o battle.o nursing.o
+<<<<<<< HEAD
 	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o battle.o nursing.o team.o $(LIBS)
+=======
+	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o battle.o team.o nursing.o $(LIBS)
+>>>>>>> b1aadc87abecf174f834cb73a643e4ceae542319
 
 jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h team.h battle.h
 	$(CC) $(CFLAGS) -c jogo.c
@@ -35,7 +39,11 @@ villains.o: villains.c villains.h bibliotecas/arvore.h utils/utils.h
 team.o: team.c team.h bibliotecas/lista.h jogo.h
 	$(CC) $(CFLAGS) -c team.c
 
+<<<<<<< HEAD
 battle.o: battle.c battle.h 
+=======
+battle.o: battle.c battle.h bibliotecas/pilha.h utils/utils.h jogo.h nursing.h
+>>>>>>> b1aadc87abecf174f834cb73a643e4ceae542319
 	$(CC) $(CFLAGS) -c battle.c 
 
 nursing.o: nursing.c nursing.h jogo.h character.h battle.h 

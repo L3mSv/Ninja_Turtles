@@ -1,14 +1,14 @@
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I. -Ibibliotecas -Ifontes -Iutils
 LIBS = -lm
 
-all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o battle.o
+all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o battle.o 
 	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o battle.o team.o $(LIBS)
 
-jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h team.h
+jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h team.h battle.h
 	$(CC) $(CFLAGS) -c jogo.c
 
-pilha.o: fonte/pilha.c bibliotecas/pilha.h
+pilha.o: fonte/pilha.c bibliotecas/pilha.h jogo.h
 	$(CC) $(CFLAGS) -c fonte/pilha.c
 
 heap.o: fonte/heap.c bibliotecas/heap.h 

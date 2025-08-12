@@ -13,6 +13,8 @@
         "lista.h": "c",
         "weapon.h": "c",
         "arvore.h": "c",
-        "conio.h": "c"
+        "conio.h": "c",
+        "villains.h": "c",
+        "team.h": "c"
     }
 }

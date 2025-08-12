@@ -5,9 +5,6 @@
 #include <windows.h> 
 #include <time.h>
 #include "battle.h"
-#include "bibliotecas/pilha.h"
-#include "utils/utils.h"
-#include "jogo.h"
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;
@@ -45,11 +42,19 @@ float teamForceCalculation(Team* team){
 
 void battleResolution(Team* team, struct Mission* mission){
     float result = 0;
+
+    /*
     float team_force = teamForceCalculation(team);
-
     srand(time(NULL));
-
     result = team_force - mission->level + (rand() % (2 - (-2) + 1) + (-2)) - (rand() % (1 - 0 + 1) + (0));
+    */
+
+    float team_force = teamForceCalculation(team);
+    float team_score = team_force / 10.0f; 
+    float mission_score = mission->level / 10.0f;
+    float luck = ((rand() % 21) - 10) / 100.0f; 
+
+    result = (team_score - mission_score) * 5 + luck * 2;
 
     print_lento("\nBattle in course...\n", 100);
 
@@ -59,32 +64,45 @@ void battleResolution(Team* team, struct Mission* mission){
 
     print_lento("\nThe mission was ", 200);
 
-    Sleep(5);
+    Sleep(10);
 
     if(result > 3){
         team->level += 0.3;
         printf("PERFECT!\n");
     }
-    else if(result <= 3 && result >= 0){
-        addInjuredMember(team);    
-        team->level += 0.2;
-        printf("VICTORY WITH COST!\n");
+    else if(result <= 3 && result >= 0){   
+        printf("VICTORY WITH COST!\n");        
+        addInjuredMember(team, result); 
+        
+        Team* temp = team;
+        while(temp != NULL)
+        {
+            if(strcmp(temp->status, "injured") != 0)
+            {
+                temp->level += 0.2;
+            }
+        }
     }
     else{
-        team->status = "injured";
-        addInjuredTeam(team);
         printf("DEFEAT\n");
+        addInjuredTeam(team, result);
     }
 
-    char c;
-    do{
-        c = getch();
-    }while(c != 27);
-    back();
+
+    VerifyRemoveInjuredMember(injured_character_list);
+
+    printf("\nPressione ESC para voltar à central de comando...");
+    while(1){
+        char c = getch();
+        if (c == 27) { 
+            break;
+        }
+    }
+    back(); 
 
 }
 
-Character* randomMember(Team* team){
+Team* randomMember(Team* team){
     if(team == NULL)
     {
         printf("\nThe list is void!\n");
@@ -92,7 +110,7 @@ Character* randomMember(Team* team){
     }
 
     int count = 0;
-    Character* temp = team;
+    Team* temp = team;
     while(temp != NULL)
     {
         count++;
@@ -110,6 +128,7 @@ Character* randomMember(Team* team){
 
     return temp;
 }
+
 
 /*
 void battleStatistics(){

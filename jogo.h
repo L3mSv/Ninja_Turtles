@@ -19,11 +19,14 @@ extern const char* VILLAINS_PATH;
 extern Pilha* logbook;
 extern Team *team;
 extern Character *character_list;
-extern Character *injured_character_list;
+extern Team *injured_character_list;
 extern Weapon *weapon_list;
 extern AVL* villains;
 extern Heap* Panel;
 extern int numMissions;
+extern int flag_mission;
+extern int flag_choiceMission;
+
 
 void introduction(); 
 void tutorial();

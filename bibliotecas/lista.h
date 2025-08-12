@@ -5,7 +5,6 @@ typedef struct Node_character{
     char* name;
     char* status;
     float level;
-    int rounds_injured;
     struct Node_character *next;
 }Character;
 
@@ -17,6 +16,7 @@ typedef struct Node_weapon{
 typedef struct Node_team{
     char* name, *status, *weapon;
     float level;
+    int rounds_injured;
     struct Node_team *next;
 }Team;
 //extern node* character_list;

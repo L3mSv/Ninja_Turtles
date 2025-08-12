@@ -17,10 +17,13 @@ const char* VILLAINS_PATH = "villains.txt";
 Pilha* logbook = NULL;
 Team *team = NULL;
 Character *character_list = NULL;
-Character *injured_character_list = NULL;
+Team *injured_character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
+
+int flag_mission = 0;
+int flag_choiceMission = 0;
 
 //pilha-> diario de bordo
 int numMissions;
@@ -270,7 +273,22 @@ Mission* createMission(const char* local, const char* description)
     {
         int description_choice = rand() % descriptions_count;
         int locals_choice = rand() % locals_count;
-        int level_choice = (rand() % 10) + 1;
+        float total_level = 0;
+        int member_count = 0;
+        Team* temp = team;
+        while(temp != NULL) {
+            total_level += temp->level;
+            member_count++;
+            temp = temp->next;
+        }
+        float avg_level = (member_count > 0) ? total_level / member_count : 1;
+
+
+        int variation = (rand() % 3) - 1; 
+        int level_choice = (int)(avg_level + variation);
+
+        if(level_choice < 1) level_choice = 1;
+        if(level_choice > 10) level_choice = 10;
 
         mission->description = descriptions[description_choice];
         mission->local = locals[locals_choice];
@@ -407,6 +425,8 @@ void selectMission(int choiceMission){
         }
         break;
     }
+    flag_mission = 1;
+    flag_choiceMission = choiceMission;
     missionPreparation(&Panel->array[choiceMission], choiceMission);
 }
 
@@ -435,11 +455,16 @@ void arsenal(){
     if(choice == 'y'){
         change_team();
     }else{
-        commandCentral();
+        if(flag_mission == 0){
+            commandCentral();
+        }else{
+            flag_mission = 0;
+            selectMission(flag_choiceMission);
+        }
     }
 
     printf("\n=== Nursing ===\n");
-    print_list_character(injured_character_list);
+    print_list_team(injured_character_list);
 
     
 }

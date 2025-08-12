@@ -2,24 +2,25 @@
 #define PILHA_H
 
 typedef struct Nodo{
-    const char* locals;
+    char* locals;
     int level;
-    const char* descriptions;
+    char* descriptions;
     struct Nodo* prox;
 }Nodo;
 
-Nodo* createNodo(const char* locals, int level, const char* descriptions);
-
 typedef struct Pilha{
-    Nodo* topo;
+    Nodo* top;
 }Pilha;
 
+#include "jogo.h"
+
+Nodo* createNodo(struct Mission* mission);
 void stackInicialization(Pilha* p);
-void push(Pilha* p, const char* locals, int level, const char* descriptions);
+void push(Pilha* p, struct Mission* mission);
 void pop(Pilha* p);
 int stackVoid(Pilha* p);
-void liberaPilha(Pilha* p ); 
-void imprimePilha(Pilha* p);
-int pegaTopoPilha(Pilha* p);
+void freeStack(Pilha* p ); 
+void stackPrint(Pilha* p);
+int catchStackTop(Pilha* p);
 
 #endif

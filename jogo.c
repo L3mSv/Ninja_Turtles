@@ -7,30 +7,20 @@
 #include <windows.h> //Para Sleep no Windows
 #include <ctype.h>
 #include <conio.h> // Para getch() no Windows
-#include "bibliotecas/pilha.h"
-#include "utils/utils.h"
-#include "bibliotecas/heap.h"
-#include "bibliotecas/lista.h"
-#include "bibliotecas/arvore.h"
-#include "character.h"
-#include "weapon.h"
-#include "villains.h"
 #include "jogo.h"
-#include "team.h"
-#include "battle.h"
+
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
 const char* VILLAINS_PATH = "villains.txt";
 
+Pilha* logbook = NULL;
 Team *team = NULL;
 Character *character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
-//pilha-> diario de bordo
-int numMissions;
-
+int numMissions = 0;
 
 // Função para aceitar apenas 'y' ou 'n' (minúsculo), sem ecoar na tela
 char getYN() {
@@ -136,6 +126,8 @@ void commandCentral()
             arsenal();
         else if(choice_modules == '5')
             leave();
+        else if(choice_modules == '3')
+            splinterLogbook();
     }
 }
 
@@ -289,8 +281,8 @@ void missionPreparation(struct Mission* mission, int index)
     char choice;
 
     printf("\n== MISSION ==\n");
-    printf("Local: %s\n", mission->local);            
-    printf("\nDescription: %s", mission->description);
+    printf("Local: %s", mission->local);            
+    printf("Description: %s", mission->description);
     printf("Level: %d\n", mission->level);
 
     printf("\n== TEAM ==\n");
@@ -305,6 +297,7 @@ void missionPreparation(struct Mission* mission, int index)
     if(choice == 'n'){
         cleanTerminal();
 
+        push(logbook, mission);
         deleteKey(Panel, index);
         addMissionToPanel();
         addMissionToPanel();
@@ -418,10 +411,10 @@ void arsenal(){
     printf("+-----------------------------------------------------------------------+\n\n");
     printf("\n[ESC] Back\n");
 
-    printf("\n~Turtles~:\n");
+    printf("\n=== Turtles ===\n");
     print_list_character(character_list);
 
-    printf("\n");
+    printf("\n=== Weapon ===\n");
     print_list_weapon(weapon_list);
 
     printf("\nYour team:\n");
@@ -437,6 +430,9 @@ void arsenal(){
     }else{
         commandCentral();
     }
+
+    printf("\n=== Nursing ===\n");
+    
 }
 
 void villain_database(){
@@ -469,21 +465,32 @@ void villain_database(){
     back();
 }
 
-void Splinter_Logbook(){
+void splinterLogbook(){
     cleanTerminal();
         
     printf("+-----------------------------------------------------------------------+\n");
     printf("|SPLINTER LOGBOOK                                                       |\n");
     printf("+-----------------------------------------------------------------------+\n\n");
-    printf("\n[ESC] Back\n");
+    printf("Stack (top to bottom):\n");
+    printf("\n[ESC] Back\n\n");
 
-    
+    stackPrint(logbook);
+
+    char c;
+    do{
+        c = getch();
+    }while(c != 27);
+    back();
 }
 
 int main(){
-    
     srand(time(NULL));
+
     initialize_team();
+
+    logbook = malloc(sizeof(Pilha));
+    stackInicialization(logbook);
+
     getting_weapon_from_file(&weapon_list);
     getting_characters_from_file(&character_list);
     get_villains_from_file(&villains);

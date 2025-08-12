@@ -5,7 +5,9 @@
 #include <windows.h> 
 #include <time.h>
 #include "battle.h"
+#include "bibliotecas/pilha.h"
 #include "utils/utils.h"
+#include "jogo.h"
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;
@@ -69,12 +71,12 @@ void battleResolution(Team* team, struct Mission* mission){
         printf("FAILURE...\n");
     }
 
-    char exit = getch();
-    while(exit != 27);
+    char c;
+    do{
+        c = getch();
+    }while(c != 27);
+    back();
 
-    commandCentral();
-
-    //battleStatistics();
 }
 
 /*

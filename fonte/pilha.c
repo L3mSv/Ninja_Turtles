@@ -1,85 +1,84 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
 #include "../bibliotecas/pilha.h"
 
-Nodo* criaNodo(const char* locals, int level, const char* descriptions){
-    Nodo* novoNodo = (Nodo*) malloc(sizeof(Nodo));
-    novoNodo->locals = locals;
-    novoNodo->level = level;
-    novoNodo->descriptions = descriptions;
-    novoNodo->prox = NULL;
-    return novoNodo;
+Nodo* createNodo(struct Mission* mission){
+    Nodo* newNodo = (Nodo*) malloc(sizeof(Nodo));
+    newNodo->locals = strdup(mission->local);
+    newNodo->level = mission->level;
+    newNodo->descriptions = strdup(mission->description);
+    newNodo->prox = NULL;
+    return newNodo;
 }
 
-void inicializaPilha(Pilha* p){
-    p->topo = NULL;
+void stackInicialization(Pilha* p){
+    p->top = NULL;
 }
 
-int pilhaVazia(Pilha* p){
-    return p->topo == NULL;
+int stackVoid(Pilha* p){
+    return p->top == NULL;
 }
 
-void push(Pilha* p, const char* locals, int level, const char* descriptions){
-    Nodo* novoNodo = criaNodo(locals, level, descriptions);
+void push(Pilha* p, struct Mission* mission){
+    Nodo* newNodo = createNodo(mission);
 
-    if(!novoNodo){
-        printf("\nOverflow na pilha!");
+    if(!newNodo){
+        printf("\nMemory allocation failed!");
         return;
     }
 
-    novoNodo->prox = p->topo;
-    p->topo = novoNodo;
+    newNodo->prox = p->top;
+    p->top = newNodo;
 }
 
 void pop(Pilha* p){
-    if(pilhaVazia(p))
-    {
-        printf("\nPilha Vazia!");
-        return;
-    }
-    else{
-        Nodo* temp = p->topo;
-        p->topo = p->topo->prox;
+    if (stackVoid(p)) {
+            printf("\nEmpty Stack!");
+            return;
+        }
+        Nodo* temp = p->top;
+        p->top = p->top->prox;
+        free(temp->locals);
+        free(temp->descriptions);
         free(temp);
-    }
 }
 
-void liberaPilha(Pilha* p){
-    while(p->topo != NULL)
+void freeStack(Pilha* p){
+    while(p->top != NULL)
     {
         pop(p);
     }
-    free(p);
-    printf("\nPilha Liberada!");
+    printf("\nReleased Stack!");
 }
 
 /*
 NAO PARECE TER UTILIDADE AGORA, MAS POR VIA DE DUVIDA DEIXA Ai
 
-Nodo* pegaTopoPilha(Pilha* p){
-    if(!pilhaVazia(p))
+Nodo* catchStackTop(Pilha* p){
+    if(!stackVoid(p))
     {
-        return p->topo->valor;
+        return p->top->valor;
     }
     else{
-        printf("\nPilha Vazia!");
+        printf("\nStack is void!");
         return INT_MIN;
     }
 }
 */
 
-void imprimePilha(Pilha* p){
-    Nodo* temp = p->topo;
-    printf("Pilha (de cima para baixo): ");
-    while(temp->prox != NULL)
-    {
-        printf("\n%s ->", temp->locals);
-        printf("\n%d ->", temp->level);
-        printf("\n%s ->", temp->descriptions);
-        temp = temp->prox;
-    }
-    printf("\n%s ", temp->locals);
-    printf("\n%d ", temp->level);
-    printf("\n%s ", temp->descriptions);
+void stackPrint(Pilha* p){
+    if (stackVoid(p)) {
+            printf("\nSorry, but there is no mission history!\n");
+            return;
+        }
+        Nodo* temp = p->top;
+        while (temp != NULL) {
+            printf("Mission:\n");
+            printf("Local: %s", temp->locals);
+            printf("Level: %d\n", temp->level);
+            printf("Description: %s\n", temp->descriptions);
+            temp = temp->prox;
+        }
 }

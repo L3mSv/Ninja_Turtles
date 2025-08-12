@@ -437,6 +437,7 @@ void arsenal(){
 
     printf("\n=== Nursing ===\n");
     
+    
 }
 
 void villain_database(){

@@ -17,6 +17,7 @@
 #include "villains.h"
 #include "jogo.h"
 #include "team.h"
+#include "battle.h"
 
 const char* DESCRIPTIONS_PATH = "descriptions.txt";
 const char* LOCALS_PATH = "locals.txt";
@@ -133,13 +134,9 @@ void commandCentral()
         else if(choice_modules == '2')
             villain_database();
         else if(choice_modules == '4')
-        {
             arsenal();
-        }
         else if(choice_modules == '5')
-        {
             leave();
-        }
     }
 }
 
@@ -288,23 +285,33 @@ Mission* createMission(const char* local, const char* description)
     return mission;
 }
 
-void missionPreparation(struct Mission* mission)
+void missionPreparation(struct Mission* mission, int index)
 {
     cleanTerminal();
     char choice;
 
     printf("\n== MISSION ==\n");
     printf("Local: %s\n", mission->local);            
-    printf("Description: %s", mission->description);
+    printf("\nDescription: %s", mission->description);
     printf("Level: %d\n", mission->level);
+
+    printf("\n== TEAM ==\n");
+    print_list_team(team);
+
     printf("\nAre you want go to the arsenal before the mission [Y/N] or press [ESC] to go back:\n\n");
     choice = getChoice('n', 'y');
     if(choice == 'y'){
         cleanTerminal();
         arsenal();
-    }else{
-        //battle();
-        printf("indo para batalha...");
+    }
+    if(choice == 'n'){
+        cleanTerminal();
+
+        deleteKey(Panel, index);
+        addMissionToPanel();
+        addMissionToPanel();
+
+        battleResolution(team, mission);
     }
 
 }
@@ -346,7 +353,7 @@ void missionPanel()
         if (choice_int >= 0 && choice_int < Panel->size) {
             // A escolha é válida, então prossiga para a batalha
             selectMission(choice_int);
-            missionPreparation(&Panel->array[choice_int]);
+            missionPreparation(&Panel->array[choice_int], choice_int);
             // Após a batalha e a exclusão da missão, saia do loop
             return;
         } else {
@@ -402,13 +409,7 @@ void selectMission(int choiceMission){
         }
         break;
     }
-    battle(Panel->array[choiceMission]);
-    deleteKey(Panel, choiceMission);
-}
-
-void battle(struct Mission mission){
-    cleanTerminal();
-    printf("\nin working...\n\n");
+    missionPreparation(&Panel->array[choiceMission], choiceMission);
 }
 
 void arsenal(){
@@ -470,6 +471,17 @@ void villain_database(){
     back();
 }
 
+void Splinter_Logbook(){
+    cleanTerminal();
+        
+    printf("+-----------------------------------------------------------------------+\n");
+    printf("|SPLINTER LOGBOOK                                                       |\n");
+    printf("+-----------------------------------------------------------------------+\n\n");
+    printf("\n[ESC] Back\n");
+
+    
+}
+
 int main(){
     
     srand(time(NULL));
@@ -477,6 +489,10 @@ int main(){
     getting_weapon_from_file(&weapon_list);
     getting_characters_from_file(&character_list);
     get_villains_from_file(&villains);
+
+    Panel = createHeap(10);
+    addMissionToPanel();
+
     cleanTerminal(); 
     //introduction();
 

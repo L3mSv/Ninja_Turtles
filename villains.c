@@ -25,7 +25,7 @@ void get_villains_from_file(AVL **root){
 
         *root = insert_node(*root, name_buffer, level_buffer, wkp_buffer);
     }
-    
+        fclose(file1);
     return;
 }
 

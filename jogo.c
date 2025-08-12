@@ -20,7 +20,10 @@ Character *character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
-int numMissions = 0;
+
+//pilha-> diario de bordo
+int numMissions;
+
 
 // Função para aceitar apenas 'y' ou 'n' (minúsculo), sem ecoar na tela
 char getYN() {
@@ -147,6 +150,7 @@ void leave()
         free_list_character(&character_list);
         free_list_team(&team);
         free_list_weapon(&weapon_list);
+        
         exit(0);
     }
     if(exitChoice == 'n'){
@@ -188,7 +192,7 @@ void introduction()
 
     Sleep(5);
 
-    printf("\n\033[95mDonatello\033[0m: Are you want join to us?");
+    printf("\n\033[95mDonatello\033[0m: Do you want join to us?");
     printf("\nGo to Tutorial: [Y] yes | [N] no ");
 
     char tutorialChoice = getChoice('n', 'y');

@@ -29,5 +29,7 @@ void getting_weapon_from_file(Weapon **head){
         add_node_weapon(head, name_buffer);
     }
     
+    fclose(file1);
+
     return;
 }

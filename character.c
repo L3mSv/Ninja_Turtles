@@ -53,6 +53,8 @@ void getting_characters_from_file(Character **head){
         add_node_character(head, name_buffer, status_buffer, level_buffer);
     }
     
+    fclose(file1);
+
     return;
 }
 

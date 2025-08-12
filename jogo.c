@@ -302,6 +302,8 @@ void missionPreparation(struct Mission* mission, int index)
     if(choice == 'n'){
         cleanTerminal();
 
+        check_team(team, mission, index);
+
         push(logbook, mission);
         deleteKey(Panel, index);
         addMissionToPanel();

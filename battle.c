@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
+#include <windows.h> 
+#include <time.h>
 #include "battle.h"
+#include "utils/utils.h"
 
 float teamForceCalculation(Team* team){
     float totalForce = 0;
@@ -24,7 +28,7 @@ float teamForceCalculation(Team* team){
         {
             totalForce += 0.5;       
         }
-        totalForce = team->level;
+        totalForce += team->level;
         numMembers++;
 
         team = team->next;
@@ -33,11 +37,53 @@ float teamForceCalculation(Team* team){
     return totalForce/numMembers;
 }
 
-float battleResolution(Team* team, struct Mission* mission){
+void battleResolution(Team* team, struct Mission* mission){
     float result = 0;
     float team_force = teamForceCalculation(team);
 
-    result = team_force - mission->level + (rand() % (2 - (-2) + 1)) + (-2) - (rand() % (1 - 0 + 1) + (0));
+    srand(time(NULL));
 
-    return result;
+    result = team_force - mission->level + (rand() % (2 - (-2) + 1) + (-2)) - (rand() % (1 - 0 + 1) + (0));
+
+    print_lento("\nBattle in course...\n", 100);
+
+    Sleep(3);
+
+    printf("\nResult: %.2f\n", result);
+
+    print_lento("\nThe mission was ", 200);
+
+    Sleep(5);
+
+    if(result > 3){
+        team->level += 0.3;
+        printf("SUCCESSFULL!\n");
+    }
+    else if(result <= 3 && result >= 0){
+        team->level += 0.2;
+        //team->
+        printf("GOOD!\n");
+    }
+    else{
+        team->status = "injured";
+        printf("FAILURE...\n");
+    }
+
+    char exit = getch();
+    while(exit != 27);
+
+    commandCentral();
+
+    //battleStatistics();
 }
+
+/*
+void battleStatistics(){
+        cleanTerminal();
+        printf("+-----------------------------------------------------------------------+\n");
+        printf("|MISSION STATISTICS                                                     |\n");
+        printf("+-----------------------------------------------------------------------+\n\n");
+
+
+}
+*/

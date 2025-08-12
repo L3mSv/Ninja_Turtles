@@ -17,7 +17,7 @@ void battle(struct Mission mission);
 void arsenal();
 void leave();
 void back();
-void missionPreparation(struct Mission* mission);
+void missionPreparation(struct Mission* mission, int index);
 char getChoice(int min_char, int max_char);
 void villain_database();
 

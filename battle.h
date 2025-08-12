@@ -6,6 +6,6 @@
     #include "weapon.h"
 
     float teamForce(Team* team);
-    float battleResolution(Team* team, struct Mission* mission);
+    void battleResolution(Team* team, struct Mission* mission);
 
 #endif 

@@ -81,7 +81,7 @@
     return;
  }
 
- void add_to_team(Team **head, char* name, char* status, char* weapon, int level){
+ void add_to_team(Team **head, char* name, char* weapon, int level){
     Team *newnode = (Team*)malloc(sizeof(Team));
     
     if(!newnode){
@@ -95,13 +95,6 @@
         return;
     }
     strcpy(newnode->name, name);
-
-    newnode->status = (char*)malloc(strlen(status) + 1);
-    if(!newnode->status){
-        printf("Error alocating memory for newnode's status.\n");
-        return;
-    }
-    strcpy(newnode->status, status);
 
     newnode->weapon = (char*)malloc(strlen(weapon) + 1);
     if(!newnode->weapon){
@@ -164,7 +157,7 @@
     }
     int i = 1;
     while(head){
-        printf("%d -%s ; Level : %d ; Current status: %s ; Weapon: %s\n", i, head->name, head->level, head->status, head->weapon);
+        printf("%d -%s ; Level : %d ; Weapon: %s\n", i, head->name, head->level, head->weapon);
         head = head->next;
         i++;
     }

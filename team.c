@@ -118,7 +118,7 @@ void swap_characters(Team **team_head, Character **char_head, int team_index, in
         }
     }
     add_node_character(&character_list, temp_team->name, temp_team->status, temp_team->level);
-    add_to_team(&team, temp_char->name, temp_char->status, temp_team->weapon, temp_char->level);
+    add_to_team(&team, temp_char->name, temp_team->weapon, temp_char->level);
     remove_from_team(&team, temp_team->name);
     remove_character_by_name(&character_list, temp_char->name);
 
@@ -196,8 +196,8 @@ void swap_weapon(Team **team_head, Weapon **weapon_head, int team_index, int wea
 }
 
 void initialize_team(){
-    add_to_team(&team, "Empty", "null", "null", 0);
-    add_to_team(&team, "Empty", "null", "null", 0);
-    add_to_team(&team, "Empty", "null", "null", 0);
-    add_to_team(&team, "Empty", "null", "null", 0);
+    add_to_team(&team, "Empty", "null", 0);
+    add_to_team(&team, "Empty", "null", 0);
+    add_to_team(&team, "Empty", "null", 0);
+    add_to_team(&team, "Empty", "null", 0);
 }

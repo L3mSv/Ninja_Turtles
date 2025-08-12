@@ -25,7 +25,7 @@ void createList_character(Character **head);
 void createList_weapon(Weapon **head);
 void add_node_character(Character **head, char* name, char* status, int level);
 void add_node_weapon(Weapon **head, char* name);
-void add_to_team(Team **head, char* name, char* status, char* weapon, int level);
+void add_to_team(Team **head, char* name, char* weapon, int level);
 void print_list_character(Character *head);
 void print_list_weapon(Weapon *head);
 void print_list_team(Team *head);

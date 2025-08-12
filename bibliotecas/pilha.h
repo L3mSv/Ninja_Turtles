@@ -8,16 +8,16 @@ typedef struct Nodo{
     struct Nodo* prox;
 }Nodo;
 
-Nodo* criaNodo(const char* locals, int level, const char* descriptions);
+Nodo* createNodo(const char* locals, int level, const char* descriptions);
 
 typedef struct Pilha{
     Nodo* topo;
 }Pilha;
 
-void inicializaPilha(Pilha* p);
+void stackInicialization(Pilha* p);
 void push(Pilha* p, const char* locals, int level, const char* descriptions);
 void pop(Pilha* p);
-int pilhaVazia(Pilha* p);
+int stackVoid(Pilha* p);
 void liberaPilha(Pilha* p ); 
 void imprimePilha(Pilha* p);
 int pegaTopoPilha(Pilha* p);

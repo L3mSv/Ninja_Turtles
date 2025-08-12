@@ -59,20 +59,17 @@ void battleResolution(Team* team, struct Mission* mission){
 
     if(result > 3){
         team->level += 0.3;
-        printf("SUCCESSFULL!\n");
+        printf("PERFECT!\n");
     }
     else if(result <= 3 && result >= 0){
+        addInjuredMember(team);    
         team->level += 0.2;
-        Character* member = randomMember(team);
-        member->status = "injured";
-        remove_character_by_name(character_list, member->name);
-        remove_from_team(team, member->name);
-        add_node_character(&injured_character_list, member->name, member->status, member->level);
-        printf("GOOD!\n");
+        printf("VICTORY WITH COST!\n");
     }
     else{
         team->status = "injured";
-        printf("FAILURE...\n");
+        addInjuredTeam(team);
+        printf("DEFEAT\n");
     }
 
     char c;

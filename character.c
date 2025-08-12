@@ -5,7 +5,7 @@
 #include "character.h"
 #include "bibliotecas/lista.h"
 
-extern Character *character_list;
+Character *character_list;
 /*
 void createCharacter(const char* name, char* status, int level)
 {   

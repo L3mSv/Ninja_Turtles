@@ -4,6 +4,7 @@
     #include "jogo.h"
     #include "team.h"
     #include "weapon.h"
+    #include "nursing.h"
 
     float teamForce(Team* team);
     void battleResolution(Team* team, struct Mission* mission);

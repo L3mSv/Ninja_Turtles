@@ -7,7 +7,7 @@
 //    char* status;
 //    int level;
 //}Character;
-
+extern Character *character_list;
 
 //void createCharacter(const char* name, char* status, int level);
 void verifyStatus(Character* character);

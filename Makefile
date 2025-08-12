@@ -38,6 +38,9 @@ team.o: team.c team.h bibliotecas/lista.h jogo.h
 battle.o: battle.c battle.h
 	$(CC) $(CFLAGS) -c battle.c 
 
+nursing.o: nursing.c nursing.h jogo.h lista.h character.h 
+	$(CC) $(CFLAGS) -c nursing.c 
+
 clean:
 	-del /Q *.o *.exe *~ all
 	-rm -rf *.o *.exe *~ all

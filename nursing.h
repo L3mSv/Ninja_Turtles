@@ -3,9 +3,10 @@
 
 #include "jogo.h"
 #include "lista.h"
+#include "character.h"
 
-void addInjuredMember(Team* team, struct Mission* mission);
-void addInjuredTeam();
+void addInjuredMember(Team* team);
+void addInjuredTeam(Team* team);
 void removeInjuredMember();
 
 #endif

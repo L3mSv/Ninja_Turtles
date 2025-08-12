@@ -14,7 +14,17 @@
     *head = NULL;
  }
 
- void add_node_character(Character **head, char* name, char* status, int level){
+int find_character_index_by_name(Character *head, const char *name) {
+    int i = 1;
+    while (head) {
+        if (strcmp(head->name, name) == 0) return i;
+        head = head->next;
+        i++;
+    }
+    return 0;
+}
+
+ void add_node_character_index(Character **head, char* name, char* status, float level, int index){
     Character *newnode = (Character*)malloc(sizeof(Character));
     
     if(!newnode){
@@ -45,12 +55,21 @@
     }
     Character *temp = *head;
 
-    while(temp->next){
+    int i = 1;
+    while(temp->next && i < (index - 1)){
         temp = temp->next;
+        i++;
     }
+    newnode->next = temp->next;
     temp->next = newnode;
     return;
  }
+
+
+ void add_node_character(Character **head, char* name, char* status, float level){
+    add_node_character_index(head, name, status, level, 100000000);
+ }
+
 
  void add_node_weapon(Weapon **head, char* name){
     Weapon *newnode = (Weapon*)malloc(sizeof(Weapon));
@@ -81,7 +100,7 @@
     return;
  }
 
- void add_to_team(Team **head, char* name, char* weapon, int level){
+ void add_to_team_index(Team **head, char* name, char* weapon, float level, int index){
     Team *newnode = (Team*)malloc(sizeof(Team));
     
     if(!newnode){
@@ -112,12 +131,20 @@
     }
     Team *temp = *head;
 
-    while(temp->next){
+    int i = 1;
+    while(temp->next && i < index-1){
         temp = temp->next;
+        i++;
     }
+    newnode->next = temp->next;
     temp->next = newnode;
     return;
  }
+
+ void add_to_team(Team **head, char* name, char* weapon, float level){
+    add_to_team_index(head, name, weapon, level, 10000000); // indice muito grande para o nodo ser adicionado no final
+ }
+
 
 
  void print_list_character(Character *head){
@@ -127,13 +154,14 @@
     }
     int i = 1;
     while(head){
-        printf("%d -%s -> Status: %s ; Level: %d\n", i, head->name, head->status, head->level);
+        printf("%d -%s -> Status: %s ; Level: %.0f\n", i, head->name, head->status, head->level);
         head = head->next;
         i++;
     }
 
     return;
  }
+
 
   void print_list_weapon(Weapon *head){
     if(!head){
@@ -142,9 +170,11 @@
     }
     printf("Weapons:\n");
 
+    int i = 1;
     while(head){
-        printf("-%s\n", head->name);
+        printf("%d- %s\n", i, head->name);
         head = head->next;
+        i++;
     }
 
     return;
@@ -157,7 +187,7 @@
     }
     int i = 1;
     while(head){
-        printf("%d -%s ; Level : %d ; Weapon: %s\n", i, head->name, head->level, head->weapon);
+        printf("%d -%s ; Level : %.0f ; Weapon: %s\n", i, head->name, head->level, head->weapon);
         head = head->next;
         i++;
     }
@@ -211,28 +241,27 @@ void free_list_team(Team **head){
 }
 
 void remove_character_by_name(Character **head, char* name){
-    if(*head == NULL) return;
-
-    Character *temp = *head;
-
-    if(strcmp(temp->name, name)== 0) {
-        Character *old = *head;
-        *head = old->next;
-        free(old);
-        return;
+    if (!head || !*head) return;
+    Character *cur = *head;
+    Character *prev = NULL;
+    while (cur) {
+        if (strcmp(cur->name, name) == 0) {
+            if (!prev) {
+                *head = cur->next;
+            } else {
+                prev->next = cur->next;
+            }
+            free(cur->name);
+            free(cur->status);
+            free(cur);
+            return;
+        }
+        prev = cur;
+        cur = cur->next;
     }
-
-    while(strcmp(temp->name, name) != 0){
-        temp = temp->next;
-    }
-    Character *temp2 = temp->next;
-    temp->next = temp->next->next;
-    free(temp2->name);
-    free(temp2->status);
-    free(temp2);
-
     return;
 }
+
 
 void remove_weapon(Weapon **head, char* name){
     if(*head == NULL) return;
@@ -257,31 +286,22 @@ void remove_weapon(Weapon **head, char* name){
     return;
 }
 
-void remove_from_team(Team **head, char* name){
-    if(*head == NULL) return;
-
-    Team *temp = *head;
-
-    if(strcmp(temp->name, name)== 0) {
-        Team *old = *head;
-        *head = old->next;
-        free(old->name);
-        free(old->status);
-        free(old->weapon);
-        free(old);
-        return;
+void remove_from_team(Team **head, char *name){
+    if (!head || !*head) return;
+    Team *cur = *head, *prev = NULL;
+    while (cur) {
+        if (strcmp(cur->name, name) == 0) {
+            if (!prev) *head = cur->next;
+            else prev->next = cur->next;
+            free(cur->name);
+            free(cur->status);
+            free(cur->weapon);
+            free(cur);
+            return;
+        }
+        prev = cur;
+        cur = cur->next;
     }
-
-    while(strcmp(temp->name, name) != 0){
-        temp = temp->next;
-    }
-
-    Team *temp2 = temp->next;
-    temp->next = temp->next->next;
-    free(temp2->name);
-    free(temp2->status);
-    free(temp2);
-
     return;
 }
 

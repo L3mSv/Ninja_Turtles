@@ -90,45 +90,57 @@ void change_character_team(){
 }
 
 void swap_characters(Team **team_head, Character **char_head, int team_index, int character_index){
+    if(team_index < 1 || character_index < 1){
+        printf("Indices must be >= 1\nPress any key to proceed.");
+        getch();
+        change_team();
+    }
+
     Character *temp_char = *char_head;
     Team *temp_team = *team_head;
 
-    for(int i = 0; i < team_index - 1; i++){
-        if(!temp_team->next){
-            printf("Invalid index for team!!\n");
-            printf("Press any key to proceed.");
-            char c = getch();
-            c++;//só fazendo uma operação qualquer para não dar "variavel não utilizada"
-
-            change_character_team();
-        }else{
-            temp_team = temp_team->next;
-        }
+    int i = 1;
+    while (i < team_index && temp_team != NULL) {
+        temp_team = temp_team->next;
+        ++i;
     }
-    for(int i = 0; i < character_index - 1; i++){
-        if(!temp_char->next){
-            printf("Invalid index for character!!\n");
-            printf("Press any key to proceed.");
-            char c = getch();
-            c++;//só fazendo uma operação qualquer para não dar "variavel não utilizada"
 
-            change_character_team();
-        }else{
-            temp_char = temp_char->next;
-        }
+    if (temp_team == NULL) {
+        printf("Invalid team index!\n");
+        printf("Press any key to proceed.\n");
+        getch();
+        change_team();
     }
-    add_node_character(&character_list, temp_team->name, temp_team->status, temp_team->level);
-    add_to_team(&team, temp_char->name, temp_team->weapon, temp_char->level);
-    remove_from_team(&team, temp_team->name);
-    remove_character_by_name(&character_list, temp_char->name);
+
+    int j = 1;
+    while (j < character_index && temp_char != NULL) {
+        temp_char = temp_char->next;
+        ++j;
+    }
+
+    if (temp_char == NULL) {
+        printf("Invalid character index!\n");
+        printf("Press any key to proceed.\n");
+        getch();
+        change_team();
+    }
+
+    char *team_weapon = temp_team->weapon ? temp_team->weapon : "null";
+    char *team_status = temp_team->status ? temp_team->status : "null";
+
+
+   
+    add_node_character_index(char_head, temp_team->name, team_status, temp_team->level, character_index);
+    add_to_team_index(team_head, temp_char->name, team_weapon, temp_char->level, team_index);
+    remove_character_by_name(char_head, temp_char->name);
+    remove_from_team(team_head, temp_team->name);
 
     printf("Successfully swappped!!\n");
 
     printf("Press any key to proceed.");
-            char c = getch();
-            c++;
-    change_team();
+    getch();
 
+    change_team();
 }
 
 

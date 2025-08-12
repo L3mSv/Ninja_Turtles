@@ -4,7 +4,7 @@
 typedef struct Node_character{
     char* name;
     char* status;
-    int level;
+    float level;
     struct Node_character *next;
 }Character;
 
@@ -15,7 +15,7 @@ typedef struct Node_weapon{
 
 typedef struct Node_team{
     char* name, *status, *weapon;
-    int level;
+    float level;
     struct Node_team *next;
 }Team;
 //extern node* character_list;
@@ -23,15 +23,18 @@ typedef struct Node_team{
 
 void createList_character(Character **head);
 void createList_weapon(Weapon **head);
-void add_node_character(Character **head, char* name, char* status, int level);
+int find_character_index_by_name(Character *head, const char *name);
+void add_node_character(Character **head, char* name, char* status, float level);
+void add_node_character_index(Character **head, char* name, char* status, float level, int index);
 void add_node_weapon(Weapon **head, char* name);
-void add_to_team(Team **head, char* name, char* weapon, int level);
+void add_to_team(Team **head, char* name, char* weapon, float level);
+void add_to_team_index(Team **head, char* name, char* weapon, float level, int index);
 void print_list_character(Character *head);
 void print_list_weapon(Weapon *head);
 void print_list_team(Team *head);
 void remove_character_by_name(Character **head, char* name);
 void remove_weapon(Weapon **head, char* name);
-void remove_from_team(Team **head, char* name);
+void remove_from_team(Team **head, char *name);
 void free_list_character(Character **head);
 void free_list_weapon(Weapon **head);
 void free_list_team(Team **head);

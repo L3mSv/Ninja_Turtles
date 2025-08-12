@@ -25,6 +25,9 @@ int find_character_index_by_name(Character *head, const char *name) {
 }
 
  void add_node_character_index(Character **head, char* name, char* status, float level, int index){
+    if (!name) name = "null";
+    if (!status) status = "null";
+
     Character *newnode = (Character*)malloc(sizeof(Character));
     
     if(!newnode){
@@ -34,6 +37,7 @@ int find_character_index_by_name(Character *head, const char *name) {
 
     newnode->name = (char*)malloc(strlen(name) + 1);
     if(!newnode->name){
+        free(newnode);
         printf("Error alocating memory for newnode's name.\n");
         return;
     }
@@ -41,6 +45,8 @@ int find_character_index_by_name(Character *head, const char *name) {
 
     newnode->status = (char*)malloc(strlen(status) + 1);
     if(!newnode->status){
+        free(newnode);
+        free(newnode->name);
         printf("Error alocating memory for newnode's status.\n");
         return;
     }
@@ -56,7 +62,7 @@ int find_character_index_by_name(Character *head, const char *name) {
     Character *temp = *head;
 
     int i = 1;
-    while(temp->next && i < (index - 1)){
+    while(temp->next && i < index){
         temp = temp->next;
         i++;
     }
@@ -100,7 +106,7 @@ int find_character_index_by_name(Character *head, const char *name) {
     return;
  }
 
- void add_to_team_index(Team **head, char* name, char* weapon, float level, int index){
+ void add_to_team_index(Team **head, char* name, char* status, char* weapon, float level, int index){
     Team *newnode = (Team*)malloc(sizeof(Team));
     
     if(!newnode){
@@ -115,9 +121,21 @@ int find_character_index_by_name(Character *head, const char *name) {
     }
     strcpy(newnode->name, name);
 
+    newnode->status = (char*)malloc(strlen(status) + 1);
+    if(!newnode->status){
+        printf("Error alocating memory for newnode's status.\n");
+        free(newnode->name);
+        free(newnode);
+        return;
+    }
+    strcpy(newnode->status, status);
+
     newnode->weapon = (char*)malloc(strlen(weapon) + 1);
     if(!newnode->weapon){
         printf("Error alocating memory for newnode's weapon.\n");
+        free(newnode->name);
+        free(newnode->status);
+        free(newnode);
         return;
     }
     strcpy(newnode->weapon, weapon);
@@ -132,7 +150,7 @@ int find_character_index_by_name(Character *head, const char *name) {
     Team *temp = *head;
 
     int i = 1;
-    while(temp->next && i < index-1){
+    while(temp->next && i < index){
         temp = temp->next;
         i++;
     }
@@ -141,8 +159,8 @@ int find_character_index_by_name(Character *head, const char *name) {
     return;
  }
 
- void add_to_team(Team **head, char* name, char* weapon, float level){
-    add_to_team_index(head, name, weapon, level, 10000000); // indice muito grande para o nodo ser adicionado no final
+ void add_to_team(Team **head, char* name, char* status, char* weapon, float level){
+    add_to_team_index(head, name, status, weapon, level, 10000000); // indice muito grande para o nodo ser adicionado no final
  }
 
 
@@ -186,7 +204,7 @@ int find_character_index_by_name(Character *head, const char *name) {
     }
     int i = 1;
     while(head){
-        printf("%d -%s ; Level : %.0f ; Weapon: %s\n", i, head->name, head->level, head->weapon);
+        printf("%d -%s ; Status : %s : Level : %.0f ; Weapon: %s\n", i, head->name, head->status, head->level, head->weapon);
         head = head->next;
         i++;
     }
@@ -241,22 +259,22 @@ void free_list_team(Team **head){
 
 void remove_character_by_name(Character **head, char* name){
     if (!head || !*head) return;
-    Character *cur = *head;
+    Character *temp = *head;
     Character *prev = NULL;
-    while (cur) {
-        if (strcmp(cur->name, name) == 0) {
+    while (temp) {
+        if (strcmp(temp->name, name) == 0) {
             if (!prev) {
-                *head = cur->next;
+                *head = temp->next;
             } else {
-                prev->next = cur->next;
+                prev->next = temp->next;
             }
-            free(cur->name);
-            free(cur->status);
-            free(cur);
+            free(temp->name);
+            free(temp->status);
+            free(temp);
             return;
         }
-        prev = cur;
-        cur = cur->next;
+        prev = temp;
+        temp = temp->next;
     }
     return;
 }
@@ -266,40 +284,43 @@ void remove_weapon(Weapon **head, char* name){
     if(*head == NULL) return;
 
     Weapon *temp = *head;
+    Weapon *prev = NULL;
 
-    if(strcmp(temp->name, name)== 0) {
-        Weapon *old = *head;
-        *head = old->next;
-        free(old);
-        return;
-    }
-
-    while(strcmp(temp->name, name) != 0){
+    while(temp){
+        if(strcmp(temp->name, name)==0){
+            if(!prev){
+                *head = temp->next;
+            }else{
+                prev->next = temp->next;
+            }
+            free(temp->name);
+            free(temp);
+            return;
+        }
+        prev = temp;
         temp = temp->next;
     }
-    Weapon *temp2 = temp->next;
-    temp->next = temp->next->next;
-    free(temp2->name);
-    free(temp2);
-
     return;
 }
 
 void remove_from_team(Team **head, char *name){
     if (!head || !*head) return;
-    Team *cur = *head, *prev = NULL;
-    while (cur) {
-        if (strcmp(cur->name, name) == 0) {
-            if (!prev) *head = cur->next;
-            else prev->next = cur->next;
-            free(cur->name);
-            free(cur->status);
-            free(cur->weapon);
-            free(cur);
+    Team *temp = *head, *prev = NULL;
+    while (temp) {
+        if (strcmp(temp->name, name) == 0) {
+            if (!prev){
+                *head = temp->next;
+            }else{
+                prev->next = temp->next;
+            }
+            free(temp->name);
+            free(temp->status);
+            free(temp->weapon);
+            free(temp);
             return;
         }
-        prev = cur;
-        cur = cur->next;
+        prev = temp;
+        temp = temp->next;
     }
     return;
 }

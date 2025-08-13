@@ -25,6 +25,7 @@ void VerifyRemoveInjuredMember(Team* team){
 }
 
 float teamForceCalculation(Team* team){
+    numMembers = 0;
     float totalForce = 0;
     FILE *file1 = fopen("bench", "w");
     while(team != NULL)
@@ -68,10 +69,10 @@ void battleResolution(Team* team, struct Mission* mission){
 
     float team_force = teamForceCalculation(team);
     float team_score = team_force / 10.0f; 
-    float mission_score = mission->level / 6.0f;
+    float mission_score = mission->level / 10.0f;
     float luck = ((rand() % 21) - 10) / 100.0f; 
 
-    result = (team_score - mission_score) * 5 + luck * 2;
+    result = (team_score - mission_score) * 7 + luck * 2;
 
     print_lento("\nBattle in course...\n", 100);
 

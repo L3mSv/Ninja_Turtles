@@ -41,6 +41,7 @@ void arsenal();
 void leave();
 void back();
 void missionPreparation(struct Mission* mission, int index);
+void check_endgame(Team *team_head, Character* char_head);
 char getChoice(int min_char, int max_char);
 void villain_database();
 void splinterLogbook();

@@ -1,6 +1,6 @@
-Donatello,available,8
-Leonardo,available,8
-Michelangelo,available,8
-Rafael,available,8
+Donatello,available,1
+Leonardo,available,1
+Michelangelo,available,1
+Rafael,available,1
 Jacob,available,1
 Morfeus,available,1

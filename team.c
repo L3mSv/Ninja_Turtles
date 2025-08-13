@@ -121,6 +121,7 @@ void swap_characters(Team **team_head, Character **char_head, int team_index, in
         getch();
         change_team();
     }
+    
 
     //char *team_weapon = temp_team->weapon ? temp_team->weapon : "null";
     //char *team_status = temp_team->status ? temp_team->status : "null";
@@ -217,8 +218,11 @@ void initialize_team(){
 }
 
 void check_team(Team *head, struct Mission* mission, int index){
-    int count_members = 0, count_weapons = 0;
+    int count_members = 0, count_weapons = 0, injured = 0;
     while(head){
+        if(strcmp(head->status, "injured") == 0){
+            injured++;
+        }
         if(strcmp(head->name, "Empty") == 0){
             count_members++;
         }
@@ -226,6 +230,12 @@ void check_team(Team *head, struct Mission* mission, int index){
             count_weapons++;
         }
         head = head->next;
+    }
+    if(injured != 0){
+        printf("You can't enter a mission with a member injured!!\n");
+        printf("Press any key to proceed.\n");
+        getch();
+        missionPreparation(mission, index);
     }
     if(count_members > 2){
         printf("You cannot have less than 2 members per mission!!");

@@ -181,5 +181,6 @@ void battleStatistics(Team* team, float resultBattle){
             break;
             }
         }
+
         back(); 
     }

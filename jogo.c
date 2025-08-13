@@ -114,6 +114,8 @@ void commandCentral()
 {
     cleanTerminal();
 
+    check_endgame(team, character_list);
+
     while(1)
     {
         printf("-- Command Central --\n\n");
@@ -546,35 +548,7 @@ void check_endgame(Team *team_head, Character* char_head){ //verifica se o jogad
         printf("Press any key to proceed.\n");
         getch();
 
-        
+
     }
 
-}
-
-int main(){
-    srand(time(NULL));
-
-    initialize_team();
-
-    logbook = malloc(sizeof(Pilha));
-    stackInicialization(logbook);
-
-    getting_weapon_from_file(&weapon_list);
-    getting_characters_from_file(&character_list);
-    injured_list_inicialization(character_list);
-    
-    get_villains_from_file(&villains);
-
-    Panel = createHeap(10);
-    addMissionToPanel();
-
-    cleanTerminal(); 
-    //introduction();
-
-    commandCentral();
-    
-
-    
-
-    return 0;
 }

@@ -8,6 +8,22 @@
 
 int numMembers = 0;
 
+void VerifyRemoveInjuredMember(Team* team){
+    Team* temp = team;
+
+    while(temp != NULL){
+        Team* next = temp->next;
+        if(temp->rounds_injured == 0)
+        {
+            temp->status = strdup("available");
+        }
+        else{
+            temp->rounds_injured--;
+        }
+        temp = next;
+    }
+}
+
 float teamForceCalculation(Team* team){
     float totalForce = 0;
     FILE *file1 = fopen("bench", "w");
@@ -60,7 +76,6 @@ void battleResolution(Team* team, struct Mission* mission){
     print_lento("\nBattle in course...\n", 100);
 
     Sleep(3);
-
     printf("\nResult: %.2f\n", result);
 
     print_lento("\nThe mission was ", 200);
@@ -73,8 +88,10 @@ void battleResolution(Team* team, struct Mission* mission){
     }
     else if(result <= 3 && result >= 0){   
         printf("VICTORY WITH COST!\n");        
-        addInjuredMember(team, result); 
-        
+        Team* member = randomMember(team);
+        member->status = strdup("injured"); 
+        member->rounds_injured = 2;
+            
         Team* temp = team;
         while(temp != NULL)
         {
@@ -88,11 +105,14 @@ void battleResolution(Team* team, struct Mission* mission){
     }
     else{
         printf("DEFEAT\n");
-        addInjuredTeam(team, result);
+        espera(10);
+        cleanTerminal();
+        printf("GAME OVER!\n");
+        exit(1);
     }
 
 
-    VerifyRemoveInjuredMember(injured_character_list);
+    VerifyRemoveInjuredMember(team);
 
     espera(15);
 
@@ -111,20 +131,30 @@ Team* randomMember(Team* team){
     Team* temp = team;
     while(temp != NULL)
     {
-        count++;
+        if(strcmp(temp->name, "Empty") != 0)
+            count++;
         temp = temp->next;
     }
+
+    if(count == 0) return NULL;
 
     srand(time(NULL));
     int random_index = rand() % count;
 
     temp = team;
-    for(int i = 0; i < random_index; ++i)
+    int i = 0;
+    while(temp != NULL)
     {
+        if(strcmp(temp->name, "Empty") != 0)
+        {
+            if(i == random_index)
+                return temp;
+            i++;
+        }
         temp = temp->next;
     }
 
-    return temp;
+    return NULL;
 }
 
 
@@ -134,6 +164,7 @@ void battleStatistics(Team* team, float resultBattle){
         printf("+-----------------------------------------------------------------------+\n");
         printf("|MISSION STATISTICS                                                     |\n");
         printf("+-----------------------------------------------------------------------+\n\n");
+        printf("\nResult: %.2f\n", resultBattle);
         printf("[ESC] Back\n");
         
         int injuredCount = 0;
@@ -144,23 +175,24 @@ void battleStatistics(Team* team, float resultBattle){
         {
             if(resultBattle > 3)
             {
-                printf("\n%s received 0.3 exp .............\n", temp->name);
+                if(strcmp(temp->name, "Empty") != 0)
+                    printf("\n%s received 0.3 exp .............\n", temp->name);
             }
             else if(resultBattle <=  3 && resultBattle >= 0)
             {
-                if(strcmp(temp->status, "avaiable") == 0)
+                if(strcmp(temp->status, "available") == 0 && strcmp(temp->name, "Empty") != 0)
                 {
                     printf("\n%s received 0.2 exp .............\n", temp->name);
-                    injuredCount++;
                 }
-                if(strcmp(temp->status, "injured") == 0)
+                if(strcmp(temp->status, "injured") == 0 && strcmp(temp->name, "Empty") != 0)
                 {
                     printf("\n%s didn't received exp >_<\n", temp->name);
                     injuredCount++;
                 }
             }
             else{
-                printf("\n%s didn't received exp >_<\n", temp->name);
+                if(strcmp(temp->name, "Empty") != 0)
+                    printf("\n%s didn't received exp >_<\n", temp->name);
             }
 
             temp = temp->next;
@@ -171,8 +203,6 @@ void battleStatistics(Team* team, float resultBattle){
             printf("\nInjured Bro's: %d/%d", injuredCount, numMembers);
             printf("\nHealthy Bro's: %d/%d\n", (numMembers - injuredCount), numMembers);
         }
-
-        printf("\nWeapons Status==========\n");
 
 
         while(1){

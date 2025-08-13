@@ -17,7 +17,6 @@ const char* VILLAINS_PATH = "villains.txt";
 Pilha* logbook = NULL;
 Team *team = NULL;
 Character *character_list = NULL;
-Character *injured_character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
@@ -438,9 +437,6 @@ void arsenal(){
     printf("+-----------------------------------------------------------------------+\n\n");
     printf("\n[ESC] Back\n");
 
-    printf("\n=== Nursing ===\n");
-    print_list_injureds(injured_character_list);
-
     printf("\n=== Characters ===\n");
     print_list_character(character_list);
 
@@ -561,7 +557,6 @@ int main(){
 
     getting_weapon_from_file(&weapon_list);
     getting_characters_from_file(&character_list);
-    injured_list_inicialization(character_list);
     
     get_villains_from_file(&villains);
 

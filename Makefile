@@ -2,8 +2,8 @@ CC = gcc
 CFLAGS = -Wall -g -I. -Ibibliotecas -Ifontes -Iutils
 LIBS = -lm
 
-all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o battle.o nursing.o
-	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o battle.o nursing.o team.o $(LIBS)
+all: jogo.o pilha.o heap.o utils.o lista.o arvore.o character.o weapon.o villains.o team.o battle.o 
+	$(CC) $(CFLAGS) -o all jogo.o pilha.o lista.o heap.o arvore.o utils.o character.o weapon.o villains.o battle.o team.o $(LIBS)
 
 jogo.o: jogo.c jogo.h bibliotecas/pilha.h utils/utils.h bibliotecas/lista.h bibliotecas/arvore.h character.h weapon.h villains.h team.h battle.h
 	$(CC) $(CFLAGS) -c jogo.c
@@ -35,11 +35,8 @@ villains.o: villains.c villains.h bibliotecas/arvore.h utils/utils.h
 team.o: team.c team.h bibliotecas/lista.h jogo.h
 	$(CC) $(CFLAGS) -c team.c
 
-battle.o: battle.c battle.h utils/utils.h bibliotecas/pilha.h nursing.h weapon.h jogo.h team.h
+battle.o: battle.c battle.h utils/utils.h bibliotecas/pilha.h weapon.h jogo.h team.h
 	$(CC) $(CFLAGS) -c battle.c 
-
-nursing.o: nursing.c nursing.h jogo.h character.h battle.h 
-	$(CC) $(CFLAGS) -c nursing.c 
 
 clean:
 	-del /Q *.o *.exe *~ all

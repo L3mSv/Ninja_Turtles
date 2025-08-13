@@ -4,7 +4,6 @@
     #include "jogo.h"
     #include "team.h"
     #include "weapon.h"
-    #include "nursing.h"
     #include "bibliotecas/pilha.h"
     #include "utils/utils.h"
 

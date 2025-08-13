@@ -113,6 +113,8 @@ void commandCentral()
 {
     cleanTerminal();
 
+    check_endgame(team, character_list);
+
     while(1)
     {
         printf("-- Command Central --\n\n");
@@ -542,7 +544,7 @@ void check_endgame(Team *team_head, Character* char_head){ //verifica se o jogad
         printf("Press any key to proceed.\n");
         getch();
 
-        
+
     }
 
 }

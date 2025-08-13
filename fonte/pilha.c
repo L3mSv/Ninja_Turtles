@@ -75,10 +75,13 @@ void stackPrint(Pilha* p){
         }
         Nodo* temp = p->top;
         while (temp != NULL) {
+            printf("---------------------------\n");
             printf("Mission:\n");
             printf("Local: %s", temp->locals);
             printf("Level: %d\n", temp->level);
             printf("Description: %s\n", temp->descriptions);
+            printf("---------------------------\n");
+
             temp = temp->prox;
         }
 }

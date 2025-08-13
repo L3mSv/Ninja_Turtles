@@ -8,11 +8,11 @@
 
 int numMembers = 0;
 
-void VerifyRemoveInjuredMember(Team* team){
-    Team* temp = team;
+void VerifyRemoveInjuredMember(Character* list){
+    Character* temp = list;
 
     while(temp != NULL){
-        Team* next = temp->next;
+        Character* next = temp->next;
         if(temp->rounds_injured == 0)
         {
             temp->status = strdup("available");
@@ -74,6 +74,21 @@ void battleResolution(Team* team, struct Mission* mission){
 
     result = (team_score - mission_score) * 7 + luck * 2;
 
+    Team* temp = team;
+    while(temp != NULL)
+    {
+        if(strcmp(temp->name, "Leonardo") == 0 && strcmp(temp->status, "available"))
+            fala_aleatoria("Leonardo", "leonardo.txt");
+        if(strcmp(temp->name, "Donatello") == 0 && strcmp(temp->status, "available"))
+            fala_aleatoria("Donatello", "donatello.txt");
+        if(strcmp(temp->name, "Rafael") == 0 && strcmp(temp->status, "available") )
+            fala_aleatoria("Rafael", "rafael.txt");
+        if(strcmp(temp->name, "Michelangelo") == 0 && strcmp(temp->status, "available"))
+            fala_aleatoria("Michelangelo", "michelangelo.txt");
+        
+        temp = temp->next;
+    }
+
     print_lento("\nBattle in course...\n", 100);
 
     Sleep(3);
@@ -113,7 +128,7 @@ void battleResolution(Team* team, struct Mission* mission){
     }
 
 
-    VerifyRemoveInjuredMember(team);
+    VerifyRemoveInjuredMember(character_list);
 
     espera(15);
 

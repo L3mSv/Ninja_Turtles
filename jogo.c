@@ -145,7 +145,7 @@ void leave()
 
     printf("Are you really want exit ?\n\n");
     printf("[Y] Yes | [N] No\n\n");
-    char exitChoice = getChoice('n', 'y');
+    char exitChoice = getYN();
     if(exitChoice == 'y')
     {
         cleanTerminal();
@@ -158,7 +158,7 @@ void leave()
         
         exit(0);
     }
-    if(exitChoice == 'n'){
+    else{
         commandCentral();
     }
 }

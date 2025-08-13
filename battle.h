@@ -13,5 +13,6 @@
     void battleResolution(Team* team, struct Mission* mission);
     Team* randomMember(Team* team);
     void battleStatistics(Team* team, float resultBattle);
+    void VerifyRemoveInjuredMember(Character* list);
 
 #endif 

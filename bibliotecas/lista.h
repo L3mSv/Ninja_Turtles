@@ -5,6 +5,7 @@ typedef struct Node_character{
     char* name;
     char* status;
     float level;
+    int rounds_injured;
     struct Node_character *next;
 }Character;
 

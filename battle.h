@@ -8,8 +8,11 @@
     #include "bibliotecas/pilha.h"
     #include "utils/utils.h"
 
+    extern int numMembers;
+
     float teamForceCalculation(Team* team);
     void battleResolution(Team* team, struct Mission* mission);
     Team* randomMember(Team* team);
+    void battleStatistics(Team* team, float resultBattle);
 
 #endif 

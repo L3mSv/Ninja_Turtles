@@ -438,7 +438,10 @@ void arsenal(){
     printf("+-----------------------------------------------------------------------+\n\n");
     printf("\n[ESC] Back\n");
 
-    printf("\n=== Turtles ===\n");
+    printf("\n=== Nursing ===\n");
+    print_list_injureds(injured_character_list);
+
+    printf("\n=== Characters ===\n");
     print_list_character(character_list);
 
     printf("\n=== Weapon ===\n");
@@ -454,7 +457,7 @@ void arsenal(){
     
     if(choice == 'y'){
         change_team();
-    }else{
+    }else if(choice == 'n'){
         if(flag_mission == 0){
             commandCentral();
         }else{
@@ -463,8 +466,6 @@ void arsenal(){
         }
     }
 
-    printf("\n=== Nursing ===\n");
-    print_list_team(injured_character_list);
 
     
 }

@@ -35,7 +35,7 @@ villains.o: villains.c villains.h bibliotecas/arvore.h utils/utils.h
 team.o: team.c team.h bibliotecas/lista.h jogo.h
 	$(CC) $(CFLAGS) -c team.c
 
-battle.o: battle.c battle.h bibliotecas/pilha.h utils/utils.h jogo.h nursing.h
+battle.o: battle.c battle.h utils/utils.h bibliotecas/pilha.h nursing.h weapon.h jogo.h team.h
 	$(CC) $(CFLAGS) -c battle.c 
 
 nursing.o: nursing.c nursing.h jogo.h character.h battle.h 

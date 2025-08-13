@@ -17,7 +17,7 @@ const char* VILLAINS_PATH = "villains.txt";
 Pilha* logbook = NULL;
 Team *team = NULL;
 Character *character_list = NULL;
-Team *injured_character_list = NULL;
+Character *injured_character_list = NULL;
 Weapon *weapon_list = NULL;
 AVL* villains = NULL;
 Heap* Panel;
@@ -523,6 +523,34 @@ void splinterLogbook(){
     back();
 }
 
+void check_endgame(Team *team_head, Character* char_head){ //verifica se o jogador possui membros suficientes para continuar jogando. Se não, o jogo acaba
+    int count1 = 0, count2 = 0;
+
+    while(team_head){
+        if(strcmp(team_head->status, "available") == 0){
+            count1++;
+        }
+        team_head = team_head->next;
+    }
+
+    while(char_head){
+        if(strcmp(char_head->status, "available") == 0){
+            count2++;
+        }
+        char_head = char_head->next;
+    }
+
+    if((count1 == 0) && (count2 == 0)){
+        printf("Game over...\n");
+        printf("No more members available.\n");
+        printf("Press any key to proceed.\n");
+        getch();
+
+        
+    }
+
+}
+
 int main(){
     srand(time(NULL));
 
@@ -533,6 +561,8 @@ int main(){
 
     getting_weapon_from_file(&weapon_list);
     getting_characters_from_file(&character_list);
+    injured_list_inicialization(character_list);
+    
     get_villains_from_file(&villains);
 
     Panel = createHeap(10);
